@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التواصل | GANG VAGOS | YELLOW EMPIRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --dark-yellow: #FFC107;
+      --gold-yellow: #FFB800;
+      --yellow-glow: #FFE55C;
+      --primary-black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --light-gray: #3A3A3A;
+      --text-light: #F5F5F5;
+      --text-gray: #AAAAAA;
+      --shadow-yellow: rgba(255, 215, 0, 0.3);
+      --discord-color: #5865F2;
+      --whatsapp-color: #25D366;
+      --telegram-color: #0088cc;
+      --email-color: #EA4335;
+      --success-green: #28a745;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Scheherazade New', sans-serif;
+    }
+    
+    body {
+      background-color: var(--primary-black);
+      color: var(--text-light);
+      line-height: 1.7;
+      direction: rtl;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)),
+        url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    /* إخفاء شريط التمرير */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-yellow);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--dark-yellow);
+    }
+    
+    /* شريط التنقل */
+    nav.navbar {
+      background-color: rgba(26, 26, 26, 0.95);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary-yellow);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .nav-brand i {
+      font-size: 1.5rem;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 20px 25px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav a:hover {
+      color: var(--primary-yellow);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-yellow);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--primary-yellow);
+    }
+    
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    .nav-cta {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black) !important;
+      padding: 10px 25px !important;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+    
+    .nav-cta:hover {
+      background-color: var(--dark-yellow);
+      color: var(--primary-black) !important;
+    }
+    
+    .nav-cta::after {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-yellow);
+      cursor: pointer;
+    }
+    
+    /* الهيدر */
+    .contact-header {
+      text-align: center;
+      padding: 80px 20px 50px;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .contact-logo {
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+      color: var(--primary-black);
+      font-size: 3.5rem;
+      line-height: 120px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+      border: 3px solid var(--primary-yellow);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+    }
+    
+    .contact-header h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      margin-bottom: 15px;
+    }
+    
+    .contact-header .tagline {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 30px;
+      position: relative;
+      padding: 10px 0;
+    }
+    
+    .tagline::before, .tagline::after {
+      content: "•";
+      color: var(--primary-yellow);
+      margin: 0 15px;
+      font-size: 1.8rem;
+    }
+    
+    /* محتوى التواصل */
+    .contact-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      color: var(--primary-yellow);
+      font-size: 2.5rem;
+      margin: 60px 0 40px;
+      padding-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      border-radius: 2px;
+    }
+    
+    /* قنوات التواصل */
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .channel-card {
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: center;
+      border-top: 5px solid;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border-right: 3px solid transparent;
+    }
+    
+    .channel-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      border-right: 3px solid var(--primary-yellow);
+    }
+    
+    .channel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    }
+    
+    .channel-icon {
+      font-size: 4rem;
+      margin-bottom: 30px;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      background-color: rgba(255, 215, 0, 0.1);
+      border: 2px solid;
+      transition: all 0.3s ease;
+    }
+    
+    .channel-card:hover .channel-icon {
+      transform: scale(1.1);
+      background-color: rgba(255, 215, 0, 0.2);
+    }
+    
+    .channel-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    
+    .channel-description {
+      color: #ccc;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      min-height: 100px;
+    }
+    
+    .channel-link {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin-top: 15px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .channel-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+      letter-spacing: 0.5px;
+    }
+    
+    .channel-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-yellow), var(--primary-yellow));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      border-radius: 30px;
+    }
+    
+    .channel-link:hover::before {
+      opacity: 1;
+    }
+    
+    .channel-details {
+      background-color: rgba(40, 40, 40, 0.7);
+      padding: 25px;
+      border-radius: 10px;
+      margin-top: 25px;
+      border-right: 3px solid;
+      text-align: right;
+    }
+    
+    .details-title {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* ألوان قنوات التواصل */
+    .channel-discord { border-color: var(--discord-color); }
+    .channel-discord .channel-icon { 
+      color: var(--discord-color); 
+      border-color: var(--discord-color);
+    }
+    .channel-discord .channel-details { border-color: var(--discord-color); }
+    
+    .channel-whatsapp { border-color: var(--whatsapp-color); }
+    .channel-whatsapp .channel-icon { 
+      color: var(--whatsapp-color); 
+      border-color: var(--whatsapp-color);
+    }
+    .channel-whatsapp .channel-details { border-color: var(--whatsapp-color); }
+    
+    .channel-telegram { border-color: var(--telegram-color); }
+    .channel-telegram .channel-icon { 
+      color: var(--telegram-color); 
+      border-color: var(--telegram-color);
+    }
+    .channel-telegram .channel-details { border-color: var(--telegram-color); }
+    
+    .channel-email { border-color: var(--email-color); }
+    .channel-email .channel-icon { 
+      color: var(--email-color); 
+      border-color: var(--email-color);
+    }
+    .channel-email .channel-details { border-color: var(--email-color); }
+    
+    .channel-support { border-color: #ff9900; }
+    .channel-support .channel-icon { 
+      color: #ff9900; 
+      border-color: #ff9900;
+    }
+    .channel-support .channel-details { border-color: #ff9900; }
+    
+    .channel-leadership { border-color: var(--primary-yellow); }
+    .channel-leadership .channel-icon { 
+      color: var(--primary-yellow); 
+      border-color: var(--primary-yellow);
+    }
+    .channel-leadership .channel-details { border-color: var(--primary-yellow); }
+    
+    /* قسم القيادة */
+    .leadership-section {
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      margin: 60px auto;
+      max-width: 1200px;
+      border: 2px solid var(--primary-yellow);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .leadership-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .leadership-title {
+      color: var(--primary-yellow);
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leadership-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leader-card {
+      background-color: rgba(40, 40, 40, 0.9);
+      border-radius: 15px;
+      padding: 35px 25px;
+      width: 320px;
+      text-align: center;
+      border-top: 5px solid var(--primary-yellow);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .leader-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      border-top: 5px solid var(--dark-yellow);
+    }
+    
+    .leader-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+      z-index: 0;
+    }
+    
+    .leader-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--primary-yellow);
+      margin: 0 auto 25px;
+      background-color: rgba(255, 215, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: var(--primary-yellow);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leader-name {
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leader-role {
+      color: var(--primary-yellow);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leader-contact {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .leader-contact p {
+      margin-bottom: 10px;
+    }
+    
+    /* قسم التعليمات */
+    .faq-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      border: 2px solid var(--light-gray);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    
+    .faq-item {
+      margin-bottom: 30px;
+      padding: 30px;
+      background-color: rgba(40, 40, 40, 0.7);
+      border-radius: 12px;
+      border-right: 5px solid var(--primary-yellow);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .faq-item:hover {
+      background-color: rgba(50, 50, 50, 0.9);
+      transform: translateX(-10px);
+    }
+    
+    .faq-question {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .faq-question i {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+    }
+    
+    .faq-answer {
+      color: #ccc;
+      font-size: 1.3rem;
+      line-height: 1.9;
+      padding-right: 40px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding-top 0.5s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-top: 20px;
+    }
+    
+    /* قسم الإرشادات */
+    .guidelines {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+      padding: 50px;
+      border-radius: 15px;
+      border: 2px solid var(--primary-yellow);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    
+    .guidelines h3 {
+      color: var(--primary-yellow);
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .guidelines ul {
+      list-style-type: none;
+      text-align: right;
+      padding-right: 20px;
+      color: #ccc;
+      font-size: 1.3rem;
+    }
+    
+    .guidelines li {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .guidelines li:hover {
+      color: white;
+      padding-right: 10px;
+    }
+    
+    .guidelines li i {
+      color: var(--primary-yellow);
+      font-size: 1.5rem;
+    }
+    
+    /* زر الرجوع */
+    .back-link {
+      display: inline-block;
+      color: var(--primary-yellow);
+      text-decoration: none;
+      font-size: 1.3rem;
+      margin-top: 40px;
+      padding: 15px 40px;
+      border: 2px solid var(--primary-yellow);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      background-color: rgba(255, 215, 0, 0.1);
+    }
+    
+    .back-link:hover {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+    }
+    
+    .back-link i {
+      margin-right: 10px;
+    }
+    
+    /* تصميم متجاوب */
+    @media (max-width: 1100px) {
+      .channels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+      
+      .contact-header h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid var(--primary-yellow);
+        z-index: 1000;
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .channels-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .leadership-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .leader-card {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      .contact-header h1 {
+        font-size: 2rem;
+      }
+      
+      .contact-header .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .channel-card, .leadership-section, .faq-section, .guidelines {
+        padding: 30px 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .contact-logo {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+        line-height: 100px;
+      }
+      
+      .contact-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .channel-title {
+        font-size: 1.6rem;
+      }
+      
+      .channel-description {
+        font-size: 1.1rem;
+      }
+      
+      .channel-link {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
+    }
+    
+    /* تأثيرات */
+    .copy-text {
+      cursor: pointer;
+      position: relative;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .copy-text:hover {
+      background-color: rgba(255, 215, 0, 0.1);
+      border-color: var(--primary-yellow);
+    }
+    
+    .copy-text:hover::after {
+      content: 'انقر للنسخ';
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background-color: var(--primary-yellow);
+      color: var(--primary-black);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    
+    .copy-success {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--success-green);
+      color: white;
+      padding: 20px 35px;
+      border-radius: 10px;
+      z-index: 2000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+      from { top: -100px; opacity: 0; }
+      to { top: 30px; opacity: 1; }
+    }
+    
+    /* نماذج الاتصال */
+    .contact-form {
+      max-width: 1000px;
+      margin: 60px auto;
+      background-color: rgba(30, 30, 30, 0.85);
+      padding: 50px;
+      border-radius: 15px;
+      border: 2px solid var(--light-gray);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    
+    .form-group {
+      margin-bottom: 30px;
+    }
+    
+    .form-group label {
+      display: block;
+      color: white;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 18px 25px;
+      background-color: rgba(40, 40, 40, 0.8);
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .form-group textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      border: none;
+      padding: 18px 50px;
+      border-radius: 30px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 40px auto 0;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+      letter-spacing: 1px;
+    }
+    
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-yellow), var(--primary-yellow));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      border-radius: 30px;
+    }
+    
+    .submit-btn:hover::before {
+      opacity: 1;
+    }
+    
+    /* تأثيرات الظهور */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* رسالة الترحيب */
+    .welcome-message {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(255, 215, 0, 0.1);
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 1000px;
+      border: 2px solid var(--primary-yellow);
+    }
+    
+    .welcome-message h3 {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .welcome-message p {
+      color: #ccc;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <i class="fas fa-crown"></i>
+        <span>GANG VAGOS</span>
+      </a>
+      
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="apply.html"><i class="fas fa-user-plus"></i> التقديم</a></li>
+        <li><a href="members.html"><i class="fas fa-users"></i> الأعضاء</a></li>
+        <li><a href="rules.html"><i class="fas fa-gavel"></i> القوانين</a></li>
+        <li><a href="contact.html" class="active"><i class="fas fa-phone-alt"></i> التواصل</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- الهيدر -->
+  <header class="contact-header">
+    <div class="contact-logo">V</div>
+    <h1>تواصل مع الإمبراطورية الصفراء</h1>
+    <p class="tagline">GANG VAGOS | YELLOW EMPIRE</p>
+    <div class="welcome-message">
+      <h3><i class="fas fa-comments"></i> بوابة التواصل الرسمية</h3>
+      <p>هنا يمكنك التواصل مع قادة وأعضاء العصابة عبر القنوات المختلفة. اختر القناة المناسبة لموضوعك للرد الأسرع والأكثر دقة.</p>
+    </div>
+  </header>
+  
+  <!-- رسالة تنبيه -->
+  <div class="guidelines fade-in">
+    <h3><i class="fas fa-exclamation-triangle"></i> إرشادات مهمة قبل التواصل</h3>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> اقرأ صفحة القوانين قبل التواصل مع القيادة</li>
+      <li><i class="fas fa-check-circle"></i> للاستفسارات العامة استخدم قناة #استفسارات في Discord</li>
+      <li><i class="fas fa-check-circle"></i> للتقديم للانضمام استخدم صفحة التقديم الرسمية</li>
+      <li><i class="fas fa-check-circle"></i> لا ترسل رسائل متكررة للقيادة</li>
+      <li><i class="fas fa-check-circle"></i> اشرح مشكلتك بوضوح واحترام</li>
+      <li><i class="fas fa-check-circle"></i> كن صبوراً في انتظار الرد (24-48 ساعة للقيادة)</li>
+    </ul>
+  </div>
+  
+  <!-- محتوى التواصل -->
+  <div class="contact-container">
+    <h2 class="section-title fade-in">بوابات التواصل الرئيسية</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 50px; font-size: 1.3rem; max-width: 800px; margin-left: auto; margin-right: auto;" class="fade-in">
+      اختر البوابة المناسبة لموضوعك. كل بوابة مصممة لنوع معين من التواصل لضمان أسرع استجابة.
+    </p>
+    
+    <!-- شبكة قنوات التواصل -->
+    <div class="channels-grid">
+      <!-- Discord -->
+      <div class="channel-card channel-discord fade-in">
+        <div class="channel-icon">
+          <i class="fab fa-discord"></i>
+        </div>
+        <div class="channel-title">حصن Discord</div>
+        <div class="channel-description">
+          القلعة الرقمية للإمبراطورية. هنا يمكنك التواصل مع جميع أعضاء العصابة، الاستفسار عن التقديم، المشاركة في المناقشات، والحصول على آخر أخبار المعارك والتحالفات.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-link"></i> رابط الدعوة الذهبي:
+          </div>
+          <div class="copy-text" id="discordLink" style="font-size: 1.4rem; font-weight: 800; color: white;">
+            https://discord.gg/T8bbPu8X
+          </div>
+          <p style="color: var(--primary-yellow); font-size: 1rem; margin-top: 15px; font-weight: 600;">
+            <i class="fas fa-mouse-pointer"></i> انقر على الرابط أعلاه للنسخ
+          </p>
+        </div>
+        <a href="#" class="channel-link" id="joinDiscordBtn">
+          <i class="fab fa-discord"></i> انضم إلى الحصن
+        </a>
+      </div>
+      
+      <!-- WhatsApp -->
+      <div class="channel-card channel-whatsapp fade-in">
+        <div class="channel-icon">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="channel-title">مجموعة WhatsApp</div>
+        <div class="channel-description">
+          للتحركات السريعة والتواصل العاجل. المجموعة مخصصة للأعضاء النشطين فقط. يتم إضافة المحاربين الجدد بعد اجتيازهم فترة الاختبار وإثبات ولائهم للإمبراطورية.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-user-shield"></i> للأعضاء المختارين فقط:
+          </div>
+          <div style="color: var(--text-gray); font-size: 1.1rem; padding: 15px; background-color: rgba(0,0,0,0.3); border-radius: 8px;">
+            ستحصل على رابط الدعوة بعد قبولك في العصابة وانتهاء فترة الاختبار بنجاح.
+          </div>
+        </div>
+        <a href="apply.html" class="https://chat.whatsapp.com/BT8IZmHnCHLIYoWtC1LQKy">
+          <i class="fas fa-user-plus"></i> قدم للانضمام
+        </a>
+      </div>
+      
+      <!-- Telegram -->
+      <div class="channel-card channel-telegram fade-in">
+        <div class="channel-icon">
+          <i class="fab fa-telegram"></i>
+        </div>
+        <div class="channel-title">قناة Telegram</div>
+        <div class="channel-description">
+          لبيانات القيادة والإعلانات المصيرية. يتم نشر التحديات الجديدة، التحالفات الاستراتيجية، والتغيرات في قوانين الإمبراطورية هنا أولاً بأول.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-bullhorn"></i> رابط القناة الرسمي:
+          </div>
+          <div class="copy-text" id="telegramLink" style="font-size: 1.4rem; font-weight: 800; color: white;">
+            https://t.me/+LFPGm6SFPX9kNmM0
+          </div>
+        </div>
+        <a href="#" class="channel-link" id="joinTelegramBtn">
+          <i class="fab fa-telegram"></i> انضم إلى القناة
+        </a>
+      </div>
+      
+      <!-- البريد الإلكتروني -->
+      <div class="channel-card channel-email fade-in">
+        <div class="channel-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="channel-title">البريد الإمبراطوري</div>
+        <div class="channel-description">
+          للرسائل الرسمية والمصيرية. يفضل استخدام البريد الإلكتروني للتحالفات الخارجية، الشكاوى الرسمية، أو المراسلات التي تحتاج إلى توثيق وتتضمن وثائق أو ملفات مرفقة.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-at"></i> العنوان الإمبراطوري:
+          </div>
+          <div class="copy-text" id="emailLink" style="font-size: 1.4rem; font-weight: 800; color: white;">
+            gangvagos68@gmail.com
+          </div>
+        </div>
+        <a href="#" class="channel-link" id="emailBtn">
+          <i class="fas fa-paper-plane"></i> أرسل رسالة إمبراطورية
+        </a>
+      </div>
+      
+      <!-- الدعم الفني -->
+      <div class="channel-card channel-support fade-in">
+        <div class="channel-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <div class="channel-title">دعم الحروب الرقمية</div>
+        <div class="channel-description">
+          لمشاكل FiveM والمعارك التقنية. إذا واجهتك مشاكل في دخول ساحة المعركة (السيرفر)، تركيب أدوات الحرب (المودات)، أو أي عقبات تقنية تعترض طريقك نحو النصر.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-tools"></i> بوابة الدعم الفني:
+          </div>
+          <div style="color: var(--text-gray); font-size: 1.1rem; padding: 15px; background-color: rgba(0,0,0,0.3); border-radius: 8px;">
+            #الدعم-الفني في حصن Discord الإمبراطوري
+          </div>
+        </div>
+        <a href="#" class="channel-link" id="supportBtn">
+          <i class="fas fa-question-circle"></i> اطلب دعم المعركة
+        </a>
+      </div>
+      
+      <!-- التواصل مع القيادة -->
+      <div class="channel-card channel-leadership fade-in">
+        <div class="channel-icon">
+          <i class="fas fa-crown"></i>
+        </div>
+        <div class="channel-title">بلاط القيادة العليا</div>
+        <div class="channel-description">
+          للقضايا المصيرية والاستراتيجية فقط. يرجى استخدام هذه البوابة بحكمة وعدم إزعاج قادة الإمبراطورية بالقضايا التي يمكن حلها عبر البوابات الأخرى.
+        </div>
+        <div class="channel-details">
+          <div class="details-title">
+            <i class="fas fa-exclamation-triangle"></i> تحذير إمبراطوري:
+          </div>
+          <div style="color: var(--primary-yellow); font-size: 1.1rem; padding: 15px; background-color: rgba(255, 215, 0, 0.1); border-radius: 8px; font-weight: 600;">
+            <i class="fas fa-crown"></i> التواصل مع PVP.OK.01 أو DARKNES فقط. لا ترسل رسائل للقيادة لأمور يمكن حلها عبر البوابات العامة.
+          </div>
+        </div>
+        <a href="#leadership" class="channel-link">
+          <i class="fas fa-users-crown"></i> تعرف على قادة الإمبراطورية
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- قسم القيادة -->
+  <div class="leadership-section fade-in" id="leadership">
+    <h2 class="leadership-title">بلاط القيادة العليا</h2>
+    <p style="color: #ccc; font-size: 1.3rem; margin-bottom: 40px; max-width: 800px; margin: 0 auto 40px;">
+      للقضايا الاستراتيجية والمصيرية فقط. يرجى قراءة الإرشادات الإمبراطورية أدناه قبل التواصل مع قادة الإمبراطورية مباشرة.
+    </p>
+    
+    <div class="leadership-cards">
+      <!-- القائد العام -->
+      <div class="leader-card">
+        <div class="leader-avatar">👑</div>
+        <div class="leader-name">EL JEFE</div>
+        <div class="leader-role">الإمبراطور الأعلى</div>
+        <div class="leader-contact">
+          <p><i class="fab fa-discord"></i> Discord: EL_JEFE#0001</p>
+          <p><i class="fas fa-clock"></i> متاح: 6 مساءً - 12 منتصف الليل</p>
+          <p style="margin-top: 15px; color: var(--primary-yellow); font-size: 1rem; font-weight: 600;">
+            <i class="fas fa-exclamation-circle"></i> للقضايا الاستراتيجية والمصيرية فقط
+          </p>
+        </div>
+        <button class="channel-link" style="width: 100%; margin-top: 10px;" id="contactLeaderBtn">
+          <i class="fas fa-envelope"></i> تواصل مع الإمبراطور
+        </button>
+      </div>
+      
+      <!-- القائد المساعد -->
+      <div class="leader-card">
+        <div class="leader-avatar">⚔️</div>
+        <div class="leader-name">PVP.OK.01</div>
+        <div class="leader-role">قائد العمليات الحربية</div>
+        <div class="leader-contact">
+          <p><i class="fab fa-discord"></i> https://discord.gg/T8bbPu8X</p>
+          <p><i class="fas fa-clock"></i> متاح: 4 مساءً - 2 صباحاً</p>
+          <p style="margin-top: 15px; color: var(--primary-yellow); font-size: 1rem; font-weight: 600;">
+            <i class="fas fa-exclamation-circle"></i> للقضايا التشغيلية وإدارة المعارك
+          </p>
+        </div>
+        <button class="channel-link" style="width: 100%; margin-top: 10px;" id="contactCoLeaderBtn">
+          <i class="fas fa-envelope"></i> تواصل مع قائد العمليات
+        </button>
+      </div>
+    </div>
+    
+    <div style="margin-top: 50px; padding: 30px; background-color: rgba(255, 215, 0, 0.1); border-radius: 12px; border: 2px solid var(--primary-yellow);">
+      <h3 style="color: white; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <i class="fas fa-scroll"></i> مبادئ التواصل مع القيادة
+      </h3>
+      <ul style="text-align: right; color: #ccc; list-style-type: none; padding-right: 20px;">
+        <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 215, 0, 0.2);">
+          <i class="fas fa-check" style="color: var(--primary-yellow);"></i> لا ترسل نفس الرسالة لأكثر من قائد
+        </li>
+        <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 215, 0, 0.2);">
+          <i class="fas fa-check" style="color: var(--primary-yellow);"></i> اشرح قضيتك بوضوح في أول رسالة
+        </li>
+        <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 215, 0, 0.2);">
+          <i class="fas fa-check" style="color: var(--primary-yellow);"></i> كن صبوراً في انتظار الرد (قد يستغرق 24-48 ساعة)
+        </li>
+        <li style="margin-bottom: 15px;">
+          <i class="fas fa-check" style="color: var(--primary-yellow);"></i> استخدم بوابات الدعم العامة للأمور غير العاجلة
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- قسم الأسئلة الشائعة -->
+  <div class="faq-section fade-in">
+    <h2 class="section-title">أسئلة إمبراطورية شائعة</h2>
+    
+    <div class="faq-item" id="faq1">
+      <div class="faq-question"><i class="fas fa-question-circle"></i> كم يستغرق الرد على طلبي الانضمام؟</div>
+      <div class="faq-answer">
+        الرد على طلبات الانضمام للإمبراطورية يستغرق 3-5 أيام عمل. نفحص كل طلب بعناية لضمان جودة المحاربين الجدد. الاستفسارات في Discord تتم الإجابة عليها خلال 24 ساعة، بينما التواصل مع القيادة قد يستغرق 24-48 ساعة للرد.
+      </div>
+    </div>
+    
+    <div class="faq-item" id="faq2">
+      <div class="faq-question"><i class="fas fa-question-circle"></i> لماذا لم أتلقى رداً على طلبي؟</div>
+      <div class="faq-answer">
+        تأكد من صحة معلومات Discord التي قدمتها. قد يكون الرد في طلبات الصداقة أو الرسائل المباشرة. إذا مرت 5 أيام ولم تتلق رداً، يمكنك إرسال رسالة تذكير لطيفة عبر بوابة الدعم الفني.
+      </div>
+    </div>
+    
+    <div class="faq-item" id="faq3">
+      <div class="faq-question"><i class="fas fa-question-circle"></i> هل يمكنني التواصل مع القيادة لأي استفسار؟</div>
+      <div class="faq-answer">
+        ننصح باستخدام البوابات العامة (#استفسارات في Discord) للأسئلة العامة. التواصل مع القيادة مخصص للقضايا الاستراتيجية والمصيرية فقط التي تؤثر على مسار الإمبراطورية.
+      </div>
+    </div>
+    
+    <div class="faq-item" id="faq4">
+      <div class="faq-question"><i class="fas fa-question-circle"></i> هل يوجد وقت محدد للتواصل مع القيادة؟</div>
+      <div class="faq-answer">
+        البوابات العامة تعمل على مدار الساعة. القيادة تكون متاحة في الأوقات المسائية (بعد 6 مساءً حسب التوقيت المحلي). يرجى عدم إرسال رسائل في وقت متأخر من الليل إلا للطوارئ المصيرية.
+      </div>
+    </div>
+    
+    <div class="faq-item" id="faq5">
+      <div class="faq-question"><i class="fas fa-question-circle"></i> كيف أتقدم بشكوى ضد أحد الأعضاء؟</div>
+      <div class="faq-answer">
+        للشكاوى ضد أعضاء الإمبراطورية، يرجى استخدام بوابة البريد الإمبراطوري (البريد الإلكتروني) مع تقديم أدلة كافية (لقطات شاشة، تسجيلات، إلخ). سيتم التحقيق في الشكوى من قبل القيادة خلال 48 ساعة.
+      </div>
+    </div>
+  </div>
+  
+  <!-- رابط الرجوع -->
+  <div style="text-align: center; margin: 60px 0 40px;">
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة إلى القلعة الرئيسية</a>
+  </div>
+  
+  <!-- رسالة نسخ ناجح -->
+  <div class="copy-success" id="copySuccess">
+    <i class="fas fa-check-circle"></i> تم نسخ النص إلى الحافظة الإمبراطورية!
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // تبديل القائمة المتنقلة
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.innerHTML = navMenu.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+      
+      // إغلاق القائمة عند النقر على رابط
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // تأثير التمرير للشريط العلوي
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.7)';
+        } else {
+          navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+        }
+      });
+      
+      // نسخ النصوص عند النقر
+      const copyElements = document.querySelectorAll('.copy-text');
+      const copySuccess = document.getElementById('copySuccess');
+      
+      copyElements.forEach(element => {
+        element.addEventListener('click', function() {
+          const textToCopy = this.textContent.trim();
+          
+          // نسخ النص إلى الحافظة
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            // عرض رسالة النجاح
+            copySuccess.style.display = 'block';
+            setTimeout(() => {
+              copySuccess.style.display = 'none';
+            }, 2500);
+            
+            // تأثير مرئي على العنصر المنسوخ
+            this.style.backgroundColor = 'rgba(255, 215, 0, 0.2)';
+            this.style.borderColor = 'var(--primary-yellow)';
+            this.style.color = 'var(--primary-yellow)';
+            
+            setTimeout(() => {
+              this.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+              this.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+              this.style.color = 'white';
+            }, 1000);
+          }).catch(err => {
+            console.error('فشل في نسخ النص: ', err);
+            alert('فشل في نسخ النص. يرجى النسخ يدوياً.');
+          });
+        });
+      });
+      
+      // محاكاة فتح الروابط
+      const joinDiscordBtn = document.getElementById('joinDiscordBtn');
+      const joinTelegramBtn = document.getElementById('joinTelegramBtn');
+      const emailBtn = document.getElementById('emailBtn');
+      const supportBtn = document.getElementById('supportBtn');
+      const contactLeaderBtn = document.getElementById('contactLeaderBtn');
+      const contactCoLeaderBtn = document.getElementById('contactCoLeaderBtn');
+      
+      joinDiscordBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const message = document.createElement('div');
+        message.innerHTML = `
+          <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--dark-gray); padding: 30px; border-radius: 15px; border: 3px solid var(--primary-yellow); z-index: 2000; max-width: 500px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+            <h3 style="color: var(--primary-yellow); margin-bottom: 20px; font-size: 1.8rem;"><i class="fab fa-discord"></i> انضمام إلى حصن Discord</h3>
+            <p style="color: #ccc; margin-bottom: 25px; font-size: 1.2rem;">سيتم توجيهك إلى Discord. تأكد من أن لديك تطبيق Discord مثبتاً على جهازك.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+              <button id="confirmDiscord" style="background-color: var(--primary-yellow); color: var(--primary-black); border: none; padding: 12px 30px; border-radius: 30px; font-weight: 800; cursor: pointer;">متابعة</button>
+              <button id="cancelDiscord" style="background-color: transparent; color: var(--text-light); border: 2px solid var(--light-gray); padding: 12px 30px; border-radius: 30px; font-weight: 800; cursor: pointer;">إلغاء</button>
+            </div>
+          </div>
+          <div style="position: fixed; top: 0; right: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1999;"></div>
+        `;
+        document.body.appendChild(message);
+        
+        document.getElementById('confirmDiscord').addEventListener('click', function() {
+          // في التطبيق الحقيقي: window.open('https://discord.gg/T8bbPu8X', '_blank');
+          alert('سيتم فتح رابط Discord. إذا لم يفتح تلقائياً، يرجى نسخ الرابط: discord.gg/GANGVAGOS');
+          document.body.removeChild(message);
+        });
+        
+        document.getElementById('cancelDiscord').addEventListener('click', function() {
+          document.body.removeChild(message);
+        });
+      });
+      
+      joinTelegramBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('سيتم توجيهك إلى قناة Telegram الرسمية لـ GANG VAGOS.');
+        // في التطبيق الحقيقي: window.open('https://t.me/+LFPGm6SFPX9kNmM0');
+      });
+      
+      emailBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'mailto:contact@gangvagos.com?subject=تواصل مع GANG VAGOS | YELLOW EMPIRE';
+      });
+      
+      supportBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('للدعم الفني، يرجى الذهاب إلى قناة #الدعم-الفني في حصن Discord الإمبراطوري الخاص بنا.');
+      });
+      
+      contactLeaderBtn.addEventListener('click', function() {
+        alert('للتواصل مع الإمبراطور EL JEFE، يرجى إرسال رسالة مباشرة على Discord إلى: EL_JEFE#0001\n\nيرجى التأكد من أن الموضوع استراتيجي ويستحق التواصل المباشر مع القيادة العليا.');
+      });
+      
+      contactCoLeaderBtn.addEventListener('click', function() {
+        alert('للتواصل مع قائد العمليات EL SICARIO، يرجى إرسال رسالة مباشرة على Discord إلى: EL_SICARIO#1234\n\nيرجى التأكد من أن الموضوع تشغيلي ويستحق التواصل المباشر مع قادة المعارك.');
+      });
+      
+      // تفعيل/إلغاء تفعيل الأسئلة الشائعة
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // إغلاق جميع العناصر الأخرى
+          faqItems.forEach(otherItem => {
+            if (otherItem !== this) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // تبديل العنصر الحالي
+          this.classList.toggle('active');
+        });
+      });
+      
+      // تأثيرات الظهور للعناصر
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        fadeObserver.observe(element);
+      });
+      
+      // تأثيرات الأزرار
+      const buttons = document.querySelectorAll('.channel-link, .back-link, .submit-btn');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+      
+      // تأثير عند التحميل
+      window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        
+        setTimeout(() => {
+          document.body.style.opacity = '1';
+        }, 100);
+      });
+      
+      // تأثيرات بطاقات القادة
+      const leaderCards = document.querySelectorAll('.leader-card');
+      leaderCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.boxShadow = '0 25px 50px rgba(255, 215, 0, 0.3)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+        });
+      });
+      
+      // تأثيرات بطاقات القنوات
+      const channelCards = document.querySelectorAll('.channel-card');
+      channelCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px) rotateX(10deg)';
+        card.style.transition = 'opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease';
+        
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) rotateX(0)';
+        }, 300 + index * 150);
+      });
+    });
+  </script>
+</body>
+</html>

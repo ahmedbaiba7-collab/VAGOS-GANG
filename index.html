@@ -1,0 +1,3611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GANG VAGOS | YELLOW EMPIRE - لوحة التحكم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --dark-yellow: #FFC107;
+      --gold-yellow: #FFB800;
+      --yellow-glow: #FFE55C;
+      --primary-black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --light-gray: #3A3A3A;
+      --text-light: #F5F5F5;
+      --text-gray: #AAAAAA;
+      --shadow-yellow: rgba(255, 215, 0, 0.3);
+      --admin-blue: #1E90FF;
+      --admin-dark-blue: #0D6EFD;
+      --success-green: #27ae60;
+      --danger-red: #e74c3c;
+      --warning-orange: #f39c12;
+      --info-cyan: #17a2b8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Scheherazade New', sans-serif;
+    }
+    
+    body {
+      background-color: var(--primary-black);
+      color: var(--text-light);
+      line-height: 1.7;
+      direction: rtl;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.05) 0%, transparent 25%),
+        linear-gradient(to bottom, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9));
+      min-height: 100vh;
+    }
+    
+    /* === نظام المشرفين المتقدم === */
+    
+    /* زر الدخول السريع للمشرفين */
+    .admin-quick-access {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-end;
+    }
+    
+    .admin-main-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--admin-blue), var(--admin-dark-blue));
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 20px rgba(30, 144, 255, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      animation: pulse-admin 2s infinite;
+    }
+    
+    .admin-main-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 8px 25px rgba(30, 144, 255, 0.6);
+    }
+    
+    .admin-tooltip {
+      position: absolute;
+      left: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--dark-gray);
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 2px solid var(--admin-blue);
+      color: white;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .admin-main-btn:hover .admin-tooltip {
+      opacity: 1;
+    }
+    
+    .admin-sub-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateX(50px);
+      pointer-events: none;
+    }
+    
+    .admin-sub-buttons.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+    
+    .admin-sub-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--medium-gray);
+      color: var(--admin-blue);
+      border: 2px solid var(--admin-blue);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .admin-sub-btn:hover {
+      background: var(--admin-blue);
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    .admin-sub-btn .badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: var(--danger-red);
+      color: white;
+      font-size: 0.7rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* نافذة الدخول السريع */
+    .admin-quick-login-modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 99999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+    
+    .admin-quick-login-modal.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .admin-login-box {
+      background: linear-gradient(135deg, var(--dark-gray), var(--primary-black));
+      width: 90%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 20px;
+      border: 3px solid var(--admin-blue);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+    
+    .admin-login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .admin-login-header h2 {
+      color: var(--admin-blue);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .admin-login-header p {
+      color: var(--text-gray);
+    }
+    
+    .admin-login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-group label {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group select {
+      padding: 15px;
+      background: var(--medium-gray);
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--admin-blue);
+      box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+    }
+    
+    .admin-login-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .admin-btn {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .admin-btn-primary {
+      background: linear-gradient(135deg, var(--admin-blue), var(--admin-dark-blue));
+      color: white;
+    }
+    
+    .admin-btn-secondary {
+      background: transparent;
+      border: 2px solid var(--admin-blue);
+      color: var(--admin-blue);
+    }
+    
+    .admin-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+    }
+    
+    .login-error {
+      background: rgba(231, 76, 60, 0.1);
+      border: 1px solid var(--danger-red);
+      color: var(--danger-red);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+      margin-top: 15px;
+    }
+    
+    .login-success {
+      background: rgba(39, 174, 96, 0.1);
+      border: 1px solid var(--success-green);
+      color: var(--success-green);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+      margin-top: 15px;
+    }
+    
+    /* لوحة التحكم السريعة */
+    .admin-quick-panel {
+      position: fixed;
+      top: 100px;
+      left: 30px;
+      width: 350px;
+      background: var(--dark-gray);
+      border-radius: 15px;
+      border: 3px solid var(--admin-blue);
+      z-index: 99998;
+      display: none;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    
+    .admin-quick-panel.active {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+    
+    .panel-header {
+      background: linear-gradient(90deg, var(--admin-blue), var(--admin-dark-blue));
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .panel-header h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+    
+    .panel-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+    
+    .panel-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .panel-body {
+      padding: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .panel-section {
+      margin-bottom: 25px;
+    }
+    
+    .panel-section h4 {
+      color: var(--admin-blue);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--medium-gray);
+    }
+    
+    .panel-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    .stat-item {
+      background: var(--medium-gray);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid var(--light-gray);
+    }
+    
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--admin-blue);
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+    }
+    
+    .panel-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .panel-action-btn {
+      padding: 12px;
+      background: var(--medium-gray);
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .panel-action-btn:hover {
+      background: var(--admin-blue);
+      border-color: var(--admin-blue);
+      color: white;
+      transform: translateX(-5px);
+    }
+    
+    /* نظام التنبيهات للمشرفين */
+    .admin-alerts {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 99997;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+    }
+    
+    .admin-alert {
+      background: var(--dark-gray);
+      border-right: 5px solid var(--warning-orange);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      animation: slideInRight 0.3s ease;
+    }
+    
+    .admin-alert.success {
+      border-right-color: var(--success-green);
+    }
+    
+    .admin-alert.error {
+      border-right-color: var(--danger-red);
+    }
+    
+    .admin-alert.info {
+      border-right-color: var(--info-cyan);
+    }
+    
+    .admin-alert-icon {
+      font-size: 1.3rem;
+      margin-top: 2px;
+    }
+    
+    .admin-alert-content {
+      flex: 1;
+    }
+    
+    .admin-alert-title {
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: white;
+    }
+    
+    .admin-alert-message {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+    }
+    
+    .admin-alert-close {
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    
+    .admin-alert-close:hover {
+      color: white;
+    }
+    
+    /* نظام الإدارة المتقدمة */
+    .advanced-admin-panel {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(26, 26, 26, 0.95);
+      border-top: 3px solid var(--admin-blue);
+      z-index: 99996;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .advanced-admin-panel.active {
+      display: flex;
+      animation: slideUp 0.3s ease;
+    }
+    
+    .admin-user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .admin-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--admin-blue), var(--admin-dark-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .admin-user-details h4 {
+      color: white;
+      margin-bottom: 3px;
+    }
+    
+    .admin-user-details span {
+      color: var(--admin-blue);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .admin-tools {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .admin-tool {
+      padding: 10px 20px;
+      background: var(--medium-gray);
+      border: none;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-tool:hover {
+      background: var(--admin-blue);
+      transform: translateY(-2px);
+    }
+    
+    .admin-logout {
+      background: var(--danger-red) !important;
+    }
+    
+    /* تأثيرات الحركة */
+    @keyframes pulse-admin {
+      0% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(30, 144, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    /* تحسينات الواجهة */
+    .admin-mode-indicator {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: var(--admin-blue);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 99995;
+      box-shadow: 0 3px 10px rgba(30, 144, 255, 0.3);
+    }
+    
+    .admin-mode-indicator.active {
+      display: flex;
+      animation: pulse-admin 2s infinite;
+    }
+    
+    /* جدار حماية وهمي */
+    .security-overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(30, 144, 255, 0.1));
+      z-index: 99990;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .security-overlay.active {
+      display: flex;
+    }
+    
+    .security-modal {
+      background: var(--primary-black);
+      padding: 40px;
+      border-radius: 20px;
+      border: 3px solid var(--admin-blue);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+    
+    .security-modal h2 {
+      color: var(--admin-blue);
+      margin-bottom: 20px;
+    }
+    
+    .security-code {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    .security-code input {
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--medium-gray);
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      color: white;
+    }
+    
+    /* === باقي أنماط الموقع === */
+    
+    /* التمرير السلس */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* إخفاء شريط التمرير */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-yellow);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--dark-yellow);
+    }
+    
+    /* الهيدر والتنقل */
+    header.hero {
+      background: 
+        linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
+        url('https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      border-bottom: 3px solid var(--primary-yellow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* ... باقي الأنماط من الكود الأصلي ... */
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 10, 10, 0.9) 70%);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .logo-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+      box-shadow: 0 0 30px var(--shadow-yellow), 0 0 60px rgba(255, 215, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: rotate 20s linear infinite;
+    }
+    
+    .logo-text {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--primary-black);
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
+    
+    header.hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      color: white;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .title-highlight {
+      color: var(--primary-yellow);
+      text-shadow: 0 0 10px var(--primary-yellow);
+    }
+    
+    .title-underline {
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+    }
+    
+    header.hero .tagline {
+      font-size: 1.6rem;
+      margin-bottom: 40px;
+      color: var(--text-light);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      padding: 10px 0;
+    }
+    
+    .tagline::before, .tagline::after {
+      content: "•";
+      color: var(--primary-yellow);
+      margin: 0 15px;
+      font-size: 1.8rem;
+    }
+    
+    /* التنقل */
+    nav.navbar {
+      background-color: rgba(26, 26, 26, 0.95);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary-yellow);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-brand i {
+      font-size: 1.5rem;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 20px 25px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav a:hover {
+      color: var(--primary-yellow);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-yellow);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--primary-yellow);
+    }
+    
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    .nav-cta {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black) !important;
+      padding: 10px 25px !important;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+    
+    .nav-cta:hover {
+      background-color: var(--dark-yellow);
+      color: var(--primary-black) !important;
+    }
+    
+    .nav-cta::after {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-yellow);
+      cursor: pointer;
+    }
+    
+    /* الأقسام */
+    section.section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      color: var(--primary-yellow);
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      position: relative;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      border-radius: 2px;
+    }
+    
+    .section-box {
+      background-color: var(--dark-gray);
+      padding: 50px;
+      border-radius: 15px;
+      border-right: 5px solid var(--primary-yellow);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+    }
+    
+    .section-content {
+      font-size: 1.2rem;
+      color: var(--text-gray);
+      line-height: 1.9;
+    }
+    
+    .section-content p {
+      margin-bottom: 20px;
+    }
+    
+    /* زر التقديم */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      padding: 16px 45px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 800;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 5px 15px var(--shadow-yellow);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+      letter-spacing: 1px;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-yellow), var(--primary-yellow));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    
+    .btn:hover::before {
+      opacity: 1;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-yellow);
+      border: 2px solid var(--primary-yellow);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black);
+    }
+    
+    /* الفوتر */
+    footer.footer {
+      background-color: var(--dark-gray);
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 80px;
+      border-top: 2px solid var(--primary-yellow);
+      color: var(--text-gray);
+      font-size: 1.1rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .footer-tagline {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 25px;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .social-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--medium-gray);
+      color: var(--primary-yellow);
+      border-radius: 50%;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .social-link:hover {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black);
+      transform: translateY(-5px);
+    }
+    
+    /* تصميم متجاوب */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid var(--primary-yellow);
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      header.hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      header.hero .tagline {
+        font-size: 1.3rem;
+      }
+      
+      .section-box {
+        padding: 35px 25px;
+      }
+      
+      .admin-quick-access {
+        bottom: 80px;
+        right: 15px;
+      }
+      
+      .admin-quick-panel {
+        width: calc(100% - 40px);
+        left: 20px;
+        top: 80px;
+      }
+      
+      .admin-alerts {
+        width: calc(100% - 40px);
+        left: 20px;
+      }
+      
+      .advanced-admin-panel {
+        padding: 0 15px;
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+    }
+    
+    /* تأثيرات إضافية */
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .typing-text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid var(--primary-yellow);
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary-yellow) }
+    }
+    
+    /* تأثير الظهور */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* مؤشر التمرير */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      right: 50%;
+      transform: translateX(50%);
+      color: var(--primary-yellow);
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(50%) translateY(0); }
+      40% { transform: translateX(50%) translateY(-10px); }
+      60% { transform: translateX(50%) translateY(-5px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- === نظام المشرفين === -->
+  
+  <!-- زر الوصول السريع للمشرفين -->
+  <div class="admin-quick-access">
+    <button class="admin-main-btn" id="adminMainBtn">
+      <i class="fas fa-user-shield"></i>
+      <span class="admin-tooltip">دخول المشرفين</span>
+    </button>
+    
+    <div class="admin-sub-buttons" id="adminSubButtons">
+      <button class="admin-sub-btn" id="adminStatsBtn" title="إحصائيات">
+        <i class="fas fa-chart-bar"></i>
+        <span class="badge" id="statsBadge">3</span>
+      </button>
+      <button class="admin-sub-btn" id="adminUsersBtn" title="الأعضاء">
+        <i class="fas fa-users"></i>
+        <span class="badge" id="usersBadge">5</span>
+      </button>
+      <button class="admin-sub-btn" id="adminReportsBtn" title="التقارير">
+        <i class="fas fa-flag"></i>
+        <span class="badge" id="reportsBadge">2</span>
+      </button>
+      <button class="admin-sub-btn" id="adminSettingsBtn" title="الإعدادات">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+  </div>
+  
+  <!-- نافذة الدخول السريع -->
+  <div class="admin-quick-login-modal" id="adminLoginModal">
+    <div class="admin-login-box">
+      <div class="admin-login-header">
+        <h2>🔐 دخول المشرفين</h2>
+        <p>أدخل بيانات الدخول للوصول إلى لوحة التحكم</p>
+      </div>
+      
+      <form class="admin-login-form" id="adminLoginForm">
+        <div class="form-group">
+          <label for="adminUsername">اسم المستخدم</label>
+          <input type="text" id="adminUsername" placeholder="أدخل اسم المستخدم" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="adminPassword">كلمة المرور</label>
+          <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="adminRole">الصفة</label>
+          <select id="adminRole" required>
+            <option value="">اختر الصفة</option>
+            <option value="superadmin">المشرف الأعلى</option>
+            <option value="admin">مشرف</option>
+            <option value="moderator">مراقب</option>
+          </select>
+        </div>
+        
+        <div class="login-error" id="loginError">
+          <i class="fas fa-exclamation-circle"></i>
+          <span id="errorMessage">اسم المستخدم أو كلمة المرور غير صحيحة</span>
+        </div>
+        
+        <div class="login-success" id="loginSuccess">
+          <i class="fas fa-check-circle"></i>
+          <span id="successMessage">تم الدخول بنجاح!</span>
+        </div>
+        
+        <div class="admin-login-actions">
+          <button type="submit" class="admin-btn admin-btn-primary">
+            <i class="fas fa-sign-in-alt"></i>
+            دخول
+          </button>
+          <button type="button" class="admin-btn admin-btn-secondary" id="cancelLoginBtn">
+            <i class="fas fa-times"></i>
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- لوحة التحكم السريعة -->
+  <div class="admin-quick-panel" id="adminQuickPanel">
+    <div class="panel-header">
+      <h3><i class="fas fa-tachometer-alt"></i> لوحة التحكم السريعة</h3>
+      <button class="panel-close" id="panelCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="panel-body">
+      <div class="panel-section">
+        <h4><i class="fas fa-chart-line"></i> إحصائيات سريعة</h4>
+        <div class="panel-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="onlineStat">47</div>
+            <div class="stat-label">لاعبون متصلون</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="reportsStat">12</div>
+            <div class="stat-label">تقارير جديدة</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="applicationsStat">8</div>
+            <div class="stat-label">طلبات جديدة</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="balanceStat">2.5M</div>
+            <div class="stat-label">رصيد الخزنة</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel-section">
+        <h4><i class="fas fa-bolt"></i> إجراءات سريعة</h4>
+        <div class="panel-actions">
+          <button class="panel-action-btn" id="quickBanBtn">
+            <i class="fas fa-ban"></i>
+            حظر لاعب
+          </button>
+          <button class="panel-action-btn" id="quickMessageBtn">
+            <i class="fas fa-broadcast-tower"></i>
+            إعلان عام
+          </button>
+          <button class="panel-action-btn" id="quickRestartBtn">
+            <i class="fas fa-redo"></i>
+            إعادة تشغيل
+          </button>
+          <button class="panel-action-btn" id="fullAdminBtn">
+            <i class="fas fa-external-link-alt"></i>
+            لوحة التحكم الكاملة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- منطقة التنبيهات -->
+  <div class="admin-alerts" id="adminAlerts"></div>
+  
+  <!-- لوحة المشرف المتقدمة -->
+  <div class="advanced-admin-panel" id="advancedAdminPanel">
+    <div class="admin-user-info">
+      <div class="admin-avatar" id="adminAvatar">A</div>
+      <div class="admin-user-details">
+        <h4 id="adminName">المشرف</h4>
+        <span id="adminRoleText">المشرف الأعلى</span>
+      </div>
+    </div>
+    
+    <div class="admin-tools">
+      <button class="admin-tool" id="adminBroadcastBtn">
+        <i class="fas fa-bullhorn"></i>
+        إعلان
+      </button>
+      <button class="admin-tool" id="adminPlayersBtn">
+        <i class="fas fa-users"></i>
+        اللاعبون
+      </button>
+      <button class="admin-tool" id="adminLogsBtn">
+        <i class="fas fa-history"></i>
+        السجلات
+      </button>
+      <button class="admin-tool admin-logout" id="adminLogoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+        تسجيل خروج
+      </button>
+    </div>
+  </div>
+  
+  <!-- مؤشر وضع المشرف -->
+  <div class="admin-mode-indicator" id="adminModeIndicator">
+    <i class="fas fa-user-shield"></i>
+    وضع المشرف نشط
+  </div>
+  
+  <!-- جدار حماية وهمي -->
+  <div class="security-overlay" id="securityOverlay">
+    <div class="security-modal">
+      <h2><i class="fas fa-shield-alt"></i> التحقق الأمني</h2>
+      <p>لحماية النظام، يرجى إدخال رمز التحقق المكون من 4 أرقام</p>
+      
+      <div class="security-code">
+        <input type="number" maxlength="1" pattern="\d" oninput="moveToNext(this, 1)">
+        <input type="number" maxlength="1" pattern="\d" oninput="moveToNext(this, 2)">
+        <input type="number" maxlength="1" pattern="\d" oninput="moveToNext(this, 3)">
+        <input type="number" maxlength="1" pattern="\d" oninput="moveToNext(this, 4)">
+      </div>
+      
+      <p id="securityError" style="color: var(--danger-red); display: none;">
+        <i class="fas fa-exclamation-triangle"></i> رمز التحقق غير صحيح
+      </p>
+      
+      <div style="display: flex; gap: 15px; margin-top: 30px;">
+        <button class="admin-btn admin-btn-primary" id="verifySecurityBtn">
+          <i class="fas fa-check"></i>
+          تحقق
+        </button>
+        <button class="admin-btn admin-btn-secondary" id="cancelSecurityBtn">
+          <i class="fas fa-times"></i>
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- === باقي الموقع === -->
+  
+  <!-- الهيدر الرئيسي -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="logo-container">
+        <div class="logo-rings"></div>
+        <div class="logo-rings"></div>
+        <div class="logo-rings"></div>
+        <div class="logo-circle">
+          <div class="logo-text">VAGOS</div>
+        </div>
+      </div>
+      
+      <h1>
+        <span class="typing-text">GANG <span class="title-highlight">VAGOS</span> | YELLOW EMPIRE</span>
+        <div class="title-underline"></div>
+      </h1>
+      
+      <p class="tagline">القوة في الوحدة – الشارع لنا – FiveM RP</p>
+      
+      <div class="hero-buttons">
+        <a href="#apply" class="btn">التقديم للعصابة</a>
+        <a href="#about" class="btn btn-outline">تعرف على الإمبراطورية</a>
+      </div>
+      
+      <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </header>
+  
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <i class="fas fa-crown"></i>
+        <span>GANG VAGOS</span>
+      </div>
+      
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="pages/members.html"><i class="fas fa-users"></i> الأعضاء</a></li>
+        <li><a href="pages/rules.html"><i class="fas fa-gavel"></i> القوانين</a></li>
+        <li><a href="pages/contact.html"><i class="fas fa-phone-alt"></i> التواصل</a></li>
+        <li><a href="#apply" class="nav-cta"><i class="fas fa-user-plus"></i> انضم إلينا</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- قسم "من نحن" الرئيسي -->
+  <section class="section" id="about">
+    <h2 class="section-title">من نحن</h2>
+    
+    <div class="section-box fade-in">
+      <div class="section-content">
+        <p>
+          <span style="color: var(--primary-yellow); font-weight: 800;">GANG VAGOS</span> هي الإمبراطورية الصفراء التي تسيطر على شوارع المدينة، عصابة منظمة تعمل بنظام RP جدي في عالم FiveM. نحن عائلة واحدة، قوتنا في وحدتنا وولائنا لبعضنا البعض.
+        </p>
+        <p>
+          نؤمن بأن اللون الأصفر ليس مجرد لون، إنه هوية. هوية القوة، الولاء، والسيطرة. الإمبراطورية الصفراء هي إرث نحمله بفخر، وتراث نبنيه بدماء وإخلاص أعضائنا.
+        </p>
+        <p>
+          انضم إلى الإمبراطورية الصفراء وكن جزءاً من الأسطورة التي تُحكى في كل زاوية من زوايا المدينة. نحن لا نبحث عن مجرد أعضاء، نبحث عن أخوة مستعدين للوقوف معاً في السراء والضراء.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- إحصائيات العصابة المتقدمة -->
+<section class="stats-section fade-in" id="advanced-stats">
+  <div class="stats-header">
+    <h2 class="section-title">قوة الإمبراطورية بالأرقام</h2>
+    <p class="stats-subtitle">إحصائيات حية تعكس هيمنتنا على الشوارع</p>
+    
+    <!-- فلتر الوقت -->
+    <div class="time-filter">
+      <button class="time-btn active" data-period="all">كل الوقت</button>
+      <button class="time-btn" data-period="month">هذا الشهر</button>
+      <button class="time-btn" data-period="week">هذا الأسبوع</button>
+      <button class="time-btn" data-period="today">اليوم</button>
+    </div>
+  </div>
+  
+  <div class="stats-container">
+    <!-- الإحصائية الأولى - الأعضاء -->
+    <div class="stat-item stat-card" data-category="members">
+      <div class="stat-icon">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="memberCount">0</div>
+          <div class="stat-change positive" id="memberChange">
+            <i class="fas fa-arrow-up"></i> +12%
+          </div>
+        </div>
+        <div class="stat-label">عضو نشط</div>
+        <div class="stat-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85%"></div>
+          </div>
+          <span class="progress-text">85% من الهدف</span>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">مستوى جديد</span>
+            <span class="detail-value" id="newMembers">8</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">نشط الآن</span>
+            <span class="detail-value" id="activeNow">47</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="members">
+        <i class="fas fa-chart-line"></i>
+        تفاصيل
+      </button>
+    </div>
+    
+    <!-- الإحصائية الثانية - المناطق -->
+    <div class="stat-item stat-card" data-category="territory">
+      <div class="stat-icon" style="background: rgba(46, 204, 113, 0.1); color: #2ecc71;">
+        <i class="fas fa-map-marked-alt"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="territoryCount">0</div>
+          <div class="stat-change positive" id="territoryChange">
+            <i class="fas fa-arrow-up"></i> +3%
+          </div>
+        </div>
+        <div class="stat-label">منطقة تحت السيطرة</div>
+        <div class="stat-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%"></div>
+          </div>
+          <span class="progress-text">60% من المدينة</span>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">محتوى حديثاً</span>
+            <span class="detail-value" id="newTerritories">2</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">مهددة</span>
+            <span class="detail-value" id="threatenedAreas">1</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="territory">
+        <i class="fas fa-map"></i>
+        الخريطة
+      </button>
+    </div>
+    
+    <!-- الإحصائية الثالثة - السنوات -->
+    <div class="stat-item stat-card" data-category="years">
+      <div class="stat-icon" style="background: rgba(155, 89, 182, 0.1); color: #9b59b6;">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="yearCount">0</div>
+          <div class="stat-change neutral" id="yearChange">
+            <i class="fas fa-minus"></i> ثابت
+          </div>
+        </div>
+        <div class="stat-label">سنة من الهيمنة</div>
+        <div class="stat-timeline">
+          <div class="timeline-item" data-year="2020">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2020</span>
+          </div>
+          <div class="timeline-item" data-year="2021">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2021</span>
+          </div>
+          <div class="timeline-item active" data-year="2022">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2022</span>
+          </div>
+          <div class="timeline-item" data-year="2023">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2023</span>
+          </div>
+          <div class="timeline-item" data-year="2024">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2024</span>
+          </div>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">تاريخ التأسيس</span>
+            <span class="detail-value">15 مارس 2020</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="years">
+        <i class="fas fa-history"></i>
+        التاريخ
+      </button>
+    </div>
+    
+    <!-- الإحصائية الرابعة - المهمات -->
+    <div class="stat-item stat-card" data-category="missions">
+      <div class="stat-icon" style="background: rgba(230, 126, 34, 0.1); color: #e67e22;">
+        <i class="fas fa-tasks"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="missionCount">0</div>
+          <div class="stat-change positive" id="missionChange">
+            <i class="fas fa-arrow-up"></i> +24%
+          </div>
+        </div>
+        <div class="stat-label">مهمة ناجحة</div>
+        <div class="stat-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 92%"></div>
+          </div>
+          <span class="progress-text">92% نجاح</span>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">اليوم</span>
+            <span class="detail-value" id="todayMissions">15</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">قيد التنفيذ</span>
+            <span class="detail-value" id="ongoingMissions">3</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="missions">
+        <i class="fas fa-list-check"></i>
+        المهام
+      </button>
+    </div>
+    
+    <!-- الإحصائية الخامسة - الدخل -->
+    <div class="stat-item stat-card" data-category="income">
+      <div class="stat-icon" style="background: rgba(39, 174, 96, 0.1); color: #27ae60;">
+        <i class="fas fa-money-bill-wave"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="incomeCount">$0</div>
+          <div class="stat-change positive" id="incomeChange">
+            <i class="fas fa-arrow-up"></i> +18%
+          </div>
+        </div>
+        <div class="stat-label">دخل شهري</div>
+        <div class="income-chart">
+          <div class="chart-bar" style="height: 40%" data-month="يناير"></div>
+          <div class="chart-bar" style="height: 55%" data-month="فبراير"></div>
+          <div class="chart-bar" style="height: 70%" data-month="مارس"></div>
+          <div class="chart-bar active" style="height: 90%" data-month="أبريل"></div>
+          <div class="chart-bar" style="height: 65%" data-month="مايو"></div>
+          <div class="chart-bar" style="height: 50%" data-month="يونيو"></div>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">الأعلى</span>
+            <span class="detail-value" id="highestIncome">$250K</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">المتوسط</span>
+            <span class="detail-value" id="averageIncome">$147K</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="income">
+        <i class="fas fa-chart-pie"></i>
+        التقارير
+      </button>
+    </div>
+    
+    <!-- الإحصائية السادسة - المعدات -->
+    <div class="stat-item stat-card" data-category="equipment">
+      <div class="stat-icon" style="background: rgba(192, 57, 43, 0.1); color: #c0392b;">
+        <i class="fas fa-gun"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-header">
+          <div class="stat-number" id="equipmentCount">0</div>
+          <div class="stat-change positive" id="equipmentChange">
+            <i class="fas fa-arrow-up"></i> +7%
+          </div>
+        </div>
+        <div class="stat-label">قطعة سلاح</div>
+        <div class="equipment-types">
+          <div class="type-item">
+            <span class="type-name">خفيفة</span>
+            <span class="type-count" id="lightWeapons">125</span>
+          </div>
+          <div class="type-item">
+            <span class="type-name">ثقيلة</span>
+            <span class="type-count" id="heavyWeapons">42</span>
+          </div>
+          <div class="type-item">
+            <span class="type-name">متخصصة</span>
+            <span class="type-count" id="specialWeapons">18</span>
+          </div>
+        </div>
+        <div class="stat-details">
+          <div class="detail-item">
+            <span class="detail-label">جاهزة</span>
+            <span class="detail-value" id="readyEquipment">92%</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">تحت الصيانة</span>
+            <span class="detail-value" id="maintenanceEquipment">8%</span>
+          </div>
+        </div>
+      </div>
+      <button class="stat-action-btn" data-stat="equipment">
+        <i class="fas fa-warehouse"></i>
+        المخزن
+      </button>
+    </div>
+  </div>
+  
+  <!-- لوحة التحكم التفاعلية -->
+  <div class="stats-controls">
+    <div class="controls-header">
+      <h3><i class="fas fa-sliders-h"></i> تحكم بالإحصائيات</h3>
+      <button class="refresh-btn" id="refreshStats">
+        <i class="fas fa-sync-alt"></i>
+        تحديث البيانات
+      </button>
+    </div>
+    
+    <div class="controls-grid">
+      <div class="control-group">
+        <label for="autoUpdate">
+          <input type="checkbox" id="autoUpdate" checked>
+          <span>تحديث تلقائي كل 30 ثانية</span>
+        </label>
+      </div>
+      
+      <div class="control-group">
+        <label for="showAnimations">
+          <input type="checkbox" id="showAnimations" checked>
+          <span>إظهار التأثيرات المتحركة</span>
+        </label>
+      </div>
+      
+      <div class="control-group">
+        <label for="detailedView">
+          <input type="checkbox" id="detailedView">
+          <span>عرض مفصل للإحصائيات</span>
+        </label>
+      </div>
+      
+      <div class="control-group">
+        <label>مستوى التفاصيل:</label>
+        <div class="slider-container">
+          <input type="range" id="detailLevel" min="1" max="3" value="2">
+          <div class="slider-labels">
+            <span>أساسي</span>
+            <span>متوسط</span>
+            <span>متقدم</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="export-buttons">
+      <button class="export-btn" data-format="image">
+        <i class="fas fa-image"></i>
+        تصدير كصورة
+      </button>
+      <button class="export-btn" data-format="pdf">
+        <i class="fas fa-file-pdf"></i>
+        تصدير كPDF
+      </button>
+      <button class="export-btn" data-format="csv">
+        <i class="fas fa-file-csv"></i>
+        تصدير كبيانات
+      </button>
+    </div>
+  </div>
+  
+  <!-- نافذة تفاصيل الإحصائيات -->
+  <div class="stats-detail-modal" id="statsDetailModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">تفاصيل الإحصائية</h3>
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- سيتم ملؤه ديناميكياً -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* أنماط قسم الإحصائيات المتقدمة */
+  
+  .stats-section {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-gray) 100%);
+    padding: 60px 20px;
+    border-top: 3px solid var(--primary-yellow);
+    border-bottom: 3px solid var(--primary-yellow);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,215,0,0.02)"/></svg>');
+    background-size: cover;
+    pointer-events: none;
+  }
+  
+  .stats-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .stats-subtitle {
+    color: var(--text-gray);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+  
+  .time-filter {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .time-btn {
+    padding: 8px 20px;
+    background: var(--medium-gray);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+  
+  .time-btn:hover {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+  }
+  
+  .time-btn.active {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border-color: var(--primary-yellow);
+  }
+  
+  .stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto 50px;
+  }
+  
+  .stat-card {
+    background: linear-gradient(145deg, var(--dark-gray), var(--medium-gray));
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 280px;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-yellow);
+    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.1);
+  }
+  
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-yellow), transparent);
+  }
+  
+  .stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary-yellow);
+    margin-bottom: 15px;
+  }
+  
+  .stat-content {
+    flex: 1;
+  }
+  
+  .stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .stat-number {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--text-light);
+    line-height: 1;
+  }
+  
+  .stat-change {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .stat-change.positive {
+    background: rgba(39, 174, 96, 0.2);
+    color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+  }
+  
+  .stat-change.negative {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+  }
+  
+  .stat-change.neutral {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    border: 1px solid rgba(149, 165, 166, 0.3);
+  }
+  
+  .stat-label {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .stat-progress {
+    margin: 15px 0;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-yellow), var(--gold-yellow));
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+  
+  .progress-text {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+  }
+  
+  .stat-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .detail-label {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+  }
+  
+  .detail-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+  
+  .stat-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    position: relative;
+  }
+  
+  .stat-timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--light-gray);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+  }
+  
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    border: 2px solid var(--dark-gray);
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-item.active .timeline-dot {
+    background: var(--primary-yellow);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+  }
+  
+  .timeline-year {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-top: 8px;
+  }
+  
+  .income-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 80px;
+    margin: 20px 0;
+  }
+  
+  .chart-bar {
+    width: 12%;
+    background: linear-gradient(to top, var(--primary-yellow), var(--gold-yellow));
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .chart-bar:hover {
+    opacity: 0.8;
+  }
+  
+  .chart-bar.active {
+    background: linear-gradient(to top, #27ae60, #2ecc71);
+  }
+  
+  .chart-bar::after {
+    content: attr(data-month);
+    position: absolute;
+    bottom: -25px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 0.7rem;
+    color: var(--text-gray);
+    white-space: nowrap;
+  }
+  
+  .equipment-types {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  
+  .type-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  .type-name {
+    color: var(--text-gray);
+  }
+  
+  .type-count {
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  
+  .stat-action-btn {
+    padding: 10px 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: var(--primary-yellow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: auto;
+  }
+  
+  .stat-action-btn:hover {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    transform: translateY(-2px);
+  }
+  
+  .stats-controls {
+    background: var(--dark-gray);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  .controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .controls-header h3 {
+    color: var(--primary-yellow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .refresh-btn {
+    padding: 10px 20px;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .refresh-btn:hover {
+    background: var(--dark-yellow);
+    transform: translateY(-2px);
+  }
+  
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .control-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--text-light);
+  }
+  
+  .control-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-yellow);
+  }
+  
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .slider-container input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--light-gray);
+    border-radius: 3px;
+    outline: none;
+  }
+  
+  .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+  }
+  
+  .export-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .export-btn {
+    padding: 12px 25px;
+    background: var(--medium-gray);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    color: var(--text-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .export-btn:hover {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border-color: var(--primary-yellow);
+  }
+  
+  .stats-detail-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .stats-detail-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .modal-content {
+    background: var(--dark-gray);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 15px;
+    border: 3px solid var(--primary-yellow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-header {
+    background: linear-gradient(90deg, var(--primary-yellow), var(--dark-yellow));
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h3 {
+    color: var(--primary-black);
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--primary-black);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+  
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-body {
+    padding: 30px;
+    overflow-y: auto;
+  }
+  
+  /* تحسينات للشاشات الصغيرة */
+  @media (max-width: 768px) {
+    .stats-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+      min-height: auto;
+    }
+    
+    .stat-number {
+      font-size: 2.2rem;
+    }
+    
+    .controls-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .export-buttons {
+      flex-direction: column;
+    }
+    
+    .export-btn {
+      justify-content: center;
+    }
+  }
+  
+  /* تأثيرات الحركة */
+  @keyframes countUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  }
+</style>
+
+<script>
+  // JavaScript لقسم الإحصائيات المتقدم
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // بيانات الإحصائيات
+    const statsData = {
+      members: {
+        current: 180,
+        target: 200,
+        new: 8,
+        active: 47,
+        change: 12
+      },
+      territory: {
+        current: 12,
+        target: 20,
+        new: 2,
+        threatened: 1,
+        change: 3
+      },
+      years: {
+        current: 5,
+        change: 0
+      },
+      missions: {
+        current: 347,
+        today: 15,
+        ongoing: 3,
+        successRate: 92,
+        change: 24
+      },
+      income: {
+        current: 187500,
+        highest: 250000,
+        average: 147000,
+        change: 18,
+        monthly: [40000, 55000, 70000, 90000, 65000, 50000]
+      },
+      equipment: {
+        current: 185,
+        light: 125,
+        heavy: 42,
+        special: 18,
+        ready: 92,
+        maintenance: 8,
+        change: 7
+      }
+    };
+    
+    // تهيئة العدادات المتحركة
+    function initAnimatedCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = getCounterTarget(counter.id);
+            animateCounter(counter, target);
+            observer.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(counter => observer.observe(counter));
+    }
+    
+    // الحصول على القيمة المستهدفة للعداد
+    function getCounterTarget(id) {
+      switch(id) {
+        case 'memberCount': return statsData.members.current;
+        case 'territoryCount': return statsData.territory.current;
+        case 'yearCount': return statsData.years.current;
+        case 'missionCount': return statsData.missions.current;
+        case 'incomeCount': return statsData.income.current;
+        case 'equipmentCount': return statsData.equipment.current;
+        default: return 0;
+      }
+    }
+    
+    // تحريك العداد
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 100;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = formatNumber(target, element.id);
+          clearInterval(timer);
+        } else {
+          element.textContent = formatNumber(Math.floor(current), element.id);
+        }
+      }, 20);
+    }
+    
+    // تنسيق الأرقام
+    function formatNumber(number, id) {
+      if (id === 'incomeCount') {
+        return `$${(number / 1000).toFixed(0)}K`;
+      }
+      return number.toLocaleString('ar-SA');
+    }
+    
+    // تحديث البيانات التفصيلية
+    function updateDetailedData() {
+      // تحديث بيانات الأعضاء
+      document.getElementById('newMembers').textContent = statsData.members.new;
+      document.getElementById('activeNow').textContent = statsData.members.active;
+      
+      // تحديث بيانات المناطق
+      document.getElementById('newTerritories').textContent = statsData.territory.new;
+      document.getElementById('threatenedAreas').textContent = statsData.territory.threatened;
+      
+      // تحديث بيانات المهمات
+      document.getElementById('todayMissions').textContent = statsData.missions.today;
+      document.getElementById('ongoingMissions').textContent = statsData.missions.ongoing;
+      
+      // تحديث بيانات الدخل
+      document.getElementById('highestIncome').textContent = `$${(statsData.income.highest / 1000).toFixed(0)}K`;
+      document.getElementById('averageIncome').textContent = `$${(statsData.income.average / 1000).toFixed(0)}K`;
+      
+      // تحديث بيانات المعدات
+      document.getElementById('lightWeapons').textContent = statsData.equipment.light;
+      document.getElementById('heavyWeapons').textContent = statsData.equipment.heavy;
+      document.getElementById('specialWeapons').textContent = statsData.equipment.special;
+      document.getElementById('readyEquipment').textContent = `${statsData.equipment.ready}%`;
+      document.getElementById('maintenanceEquipment').textContent = `${statsData.equipment.maintenance}%`;
+    }
+    
+    // فلترة البيانات حسب الفترة الزمنية
+    function setupTimeFilter() {
+      const timeButtons = document.querySelectorAll('.time-btn');
+      
+      timeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // إزالة النشاط من جميع الأزرار
+          timeButtons.forEach(btn => btn.classList.remove('active'));
+          // إضافة النشاط للزر المضغوط
+          this.classList.add('active');
+          
+          const period = this.dataset.period;
+          filterStatsByPeriod(period);
+        });
+      });
+    }
+    
+    // فلترة الإحصائيات حسب الفترة
+    function filterStatsByPeriod(period) {
+      // محاكاة بيانات مختلفة لكل فترة
+      const periodData = {
+        all: statsData,
+        month: {
+          members: { ...statsData.members, current: 45, change: 8 },
+          territory: { ...statsData.territory, current: 3, change: 1 },
+          missions: { ...statsData.missions, current: 87, change: 15 },
+          income: { ...statsData.income, current: 45000, change: 12 }
+        },
+        week: {
+          members: { ...statsData.members, current: 12, change: 3 },
+          territory: { ...statsData.territory, current: 1, change: 0 },
+          missions: { ...statsData.missions, current: 32, change: 8 },
+          income: { ...statsData.income, current: 15000, change: 5 }
+        },
+        today: {
+          members: { ...statsData.members, current: 3, change: 1 },
+          territory: { ...statsData.territory, current: 0, change: 0 },
+          missions: { ...statsData.missions, current: 15, change: 3 },
+          income: { ...statsData.income, current: 5000, change: 2 }
+        }
+      };
+      
+      const data = periodData[period] || statsData;
+      
+      // تحديث العدادات
+      document.getElementById('memberCount').textContent = formatNumber(data.members.current, 'memberCount');
+      document.getElementById('territoryCount').textContent = formatNumber(data.territory.current, 'territoryCount');
+      document.getElementById('missionCount').textContent = formatNumber(data.missions.current, 'missionCount');
+      document.getElementById('incomeCount').textContent = formatNumber(data.income.current, 'incomeCount');
+      
+      // تحديث نسب التغيير
+      document.getElementById('memberChange').innerHTML = 
+        `<i class="fas fa-arrow-up"></i> +${data.members.change}%`;
+      document.getElementById('territoryChange').innerHTML = 
+        `<i class="fas fa-arrow-up"></i> +${data.territory.change}%`;
+      document.getElementById('missionChange').innerHTML = 
+        `<i class="fas fa-arrow-up"></i> +${data.missions.change}%`;
+      document.getElementById('incomeChange').innerHTML = 
+        `<i class="fas fa-arrow-up"></i> +${data.income.change}%`;
+    }
+    
+    // تفعيل أزرار الإجراءات
+    function setupActionButtons() {
+      const actionButtons = document.querySelectorAll('.stat-action-btn');
+      const modal = document.getElementById('statsDetailModal');
+      const modalClose = document.getElementById('modalClose');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      
+      actionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const statCategory = this.dataset.stat;
+          showStatDetails(statCategory);
+        });
+      });
+      
+      // إغلاق النافذة
+      modalClose.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+      
+      // إغلاق بالنقر خارج النافذة
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+    
+    // إظهار تفاصيل الإحصائية
+    function showStatDetails(category) {
+      const modal = document.getElementById('statsDetailModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      
+      const details = {
+        members: {
+          title: 'تفاصيل الأعضاء',
+          content: `
+            <div class="detail-chart">
+              <h4>توزيع الأعضاء</h4>
+              <div class="chart-container">
+                <div class="chart-item">
+                  <div class="chart-bar" style="height: 80%; background: var(--primary-yellow);">
+                    <span class="chart-label">المؤسسون (15%)</span>
+                  </div>
+                </div>
+                <div class="chart-item">
+                  <div class="chart-bar" style="height: 95%; background: var(--success-green);">
+                    <span class="chart-label">قدامى (35%)</span>
+                  </div>
+                </div>
+                <div class="chart-item">
+                  <div class="chart-bar" style="height: 65%; background: var(--info-blue);">
+                    <span class="chart-label">نشطاء (30%)</span>
+                  </div>
+                </div>
+                <div class="chart-item">
+                  <div class="chart-bar" style="height: 45%; background: var(--warning-orange);">
+                    <span class="chart-label">مبتدئون (20%)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-stats">
+              <div class="stat-row">
+                <span>النشاط اليومي:</span>
+                <span class="stat-value">${statsData.members.active} عضو</span>
+              </div>
+              <div class="stat-row">
+                <span>متوسط المهام:</span>
+                <span class="stat-value">4.7 مهمة/عضو</span>
+              </div>
+              <div class="stat-row">
+                <span>معدل الاحتفاظ:</span>
+                <span class="stat-value">89%</span>
+              </div>
+            </div>
+          `
+        },
+        territory: {
+          title: 'خريطة السيطرة',
+          content: `
+            <div class="territory-map-detail">
+              <h4>المناطق الخاضعة للسيطرة</h4>
+              <div class="map-grid">
+                <div class="map-zone" style="grid-area: a;">
+                  <span class="zone-name">الميناء</span>
+                  <span class="zone-status active">مستقر</span>
+                </div>
+                <div class="map-zone" style="grid-area: b;">
+                  <span class="zone-name">الوسط التجاري</span>
+                  <span class="zone-status active">مستقر</span>
+                </div>
+                <div class="map-zone" style="grid-area: c;">
+                  <span class="zone-name">الضواحي</span>
+                  <span class="zone-status warning">مهدد</span>
+                </div>
+                <div class="map-zone" style="grid-area: d;">
+                  <span class="zone-name">المنطقة الصناعية</span>
+                  <span class="zone-status active">مستقر</span>
+                </div>
+              </div>
+              <div class="territory-info">
+                <div class="info-item">
+                  <span>إجمالي الإيرادات الشهرية:</span>
+                  <span class="info-value">$94,500</span>
+                </div>
+                <div class="info-item">
+                  <span>قوة الحراسة:</span>
+                  <span class="info-value">47 حارس</span>
+                </div>
+              </div>
+            </div>
+          `
+        },
+        // ... تفاصيل باقي الفئات
+      };
+      
+      const detail = details[category] || {
+        title: 'تفاصيل الإحصائية',
+        content: '<p>لا توجد تفاصيل متاحة حاليًا.</p>'
+      };
+      
+      modalTitle.textContent = detail.title;
+      modalBody.innerHTML = detail.content;
+      modal.classList.add('active');
+    }
+    
+    // تفعيل زر التحديث
+    document.getElementById('refreshStats').addEventListener('click', function() {
+      // إضافة تأثير تحميل
+      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحديث...';
+      this.disabled = true;
+      
+      // محاكاة تحديث البيانات
+      setTimeout(() => {
+        // تحديث بيانات عشوائية
+        statsData.members.current += Math.floor(Math.random() * 5);
+        statsData.missions.current += Math.floor(Math.random() * 10);
+        statsData.income.current += Math.floor(Math.random() * 5000);
+        
+        // تحديث العدادات
+        document.getElementById('memberCount').textContent = 
+          formatNumber(statsData.members.current, 'memberCount');
+        document.getElementById('missionCount').textContent = 
+          formatNumber(statsData.missions.current, 'missionCount');
+        document.getElementById('incomeCount').textContent = 
+          formatNumber(statsData.income.current, 'incomeCount');
+        
+        // إعادة تعيين الزر
+        this.innerHTML = '<i class="fas fa-sync-alt"></i> تحديث البيانات';
+        this.disabled = false;
+        
+        // إظهار تنبيه
+        showAlert('تم التحديث', 'تم تحديث بيانات الإحصائيات بنجاح', 'success');
+      }, 1500);
+    });
+    
+    // تفعيل عناصر التحكم
+    function setupControls() {
+      const autoUpdate = document.getElementById('autoUpdate');
+      const showAnimations = document.getElementById('showAnimations');
+      const detailedView = document.getElementById('detailedView');
+      const detailLevel = document.getElementById('detailLevel');
+      
+      // التحديث التلقائي
+      let autoUpdateInterval;
+      
+      autoUpdate.addEventListener('change', function() {
+        if (this.checked) {
+          autoUpdateInterval = setInterval(() => {
+            simulateRealTimeUpdate();
+          }, 30000);
+        } else {
+          clearInterval(autoUpdateInterval);
+        }
+      });
+      
+      // إظهار/إخفاء التأثيرات
+      showAnimations.addEventListener('change', function() {
+        document.body.classList.toggle('no-animations', !this.checked);
+      });
+      
+      // مستوى التفاصيل
+      detailLevel.addEventListener('input', function() {
+        const level = parseInt(this.value);
+        updateDetailLevel(level);
+      });
+      
+      // أزرار التصدير
+      document.querySelectorAll('.export-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const format = this.dataset.format;
+          exportStats(format);
+        });
+      });
+    }
+    
+    // محاكاة تحديث البيانات في الوقت الحقيقي
+    function simulateRealTimeUpdate() {
+      // تحديث بسيط للبيانات
+      statsData.members.active = Math.floor(Math.random() * 20) + 40;
+      statsData.missions.today = Math.floor(Math.random() * 10) + 10;
+      
+      // تحديث العرض
+      document.getElementById('activeNow').textContent = statsData.members.active;
+      document.getElementById('todayMissions').textContent = statsData.missions.today;
+      
+      // تأثير بصرية
+      document.querySelectorAll('.stat-card').forEach(card => {
+        card.style.animation = 'pulseGlow 1s';
+        setTimeout(() => {
+          card.style.animation = '';
+        }, 1000);
+      });
+    }
+    
+    // تحديث مستوى التفاصيل
+    function updateDetailLevel(level) {
+      const cards = document.querySelectorAll('.stat-card');
+      const details = document.querySelectorAll('.stat-details');
+      
+      cards.forEach(card => {
+        if (level === 1) {
+          card.classList.add('basic-view');
+          card.classList.remove('detailed-view');
+        } else if (level === 3) {
+          card.classList.add('detailed-view');
+          card.classList.remove('basic-view');
+        } else {
+          card.classList.remove('basic-view', 'detailed-view');
+        }
+      });
+      
+      details.forEach(detail => {
+        detail.style.display = level >= 2 ? 'grid' : 'none';
+      });
+    }
+    
+    // تصدير البيانات
+    function exportStats(format) {
+      const exportData = {
+        timestamp: new Date().toLocaleString('ar-SA'),
+        stats: statsData
+      };
+      
+      switch(format) {
+        case 'image':
+          // محاكاة تصدير الصورة
+          showAlert('التصدير', 'جاري تصدير الصورة...', 'info');
+          setTimeout(() => {
+            showAlert('نجاح', 'تم تصدير الصورة بنجاح', 'success');
+          }, 2000);
+          break;
+        case 'pdf':
+          showAlert('التصدير', 'جاري إنشاء ملف PDF...', 'info');
+          setTimeout(() => {
+            showAlert('نجاح', 'تم إنشاء ملف PDF بنجاح', 'success');
+          }, 2000);
+          break;
+        case 'csv':
+          // إنشاء بيانات CSV
+          const csvContent = "data:text/csv;charset=utf-8," 
+            + "الإحصائية,القيمة,التغيير\n"
+            + `الأعضاء,${statsData.members.current},+${statsData.members.change}%\n`
+            + `المناطق,${statsData.territory.current},+${statsData.territory.change}%\n`
+            + `المهام,${statsData.missions.current},+${statsData.missions.change}%\n`;
+          
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "vagos_stats.csv");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          break;
+      }
+    }
+    
+    // إظهار تنبيه
+    function showAlert(title, message, type) {
+      const alert = document.createElement('div');
+      alert.className = `admin-alert ${type}`;
+      alert.style.position = 'fixed';
+      alert.style.bottom = '20px';
+      alert.style.left = '20px';
+      alert.innerHTML = `
+        <div class="admin-alert-icon">
+          ${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}
+        </div>
+        <div class="admin-alert-content">
+          <div class="admin-alert-title">${title}</div>
+          <div class="admin-alert-message">${message}</div>
+        </div>
+      `;
+      
+      document.body.appendChild(alert);
+      
+      setTimeout(() => {
+        alert.style.opacity = '0';
+        setTimeout(() => {
+          alert.remove();
+        }, 300);
+      }, 3000);
+    }
+    
+    // تهيئة النظام
+    function initStatsSystem() {
+      initAnimatedCounters();
+      updateDetailedData();
+      setupTimeFilter();
+      setupActionButtons();
+      setupControls();
+      
+      // بدء التحديث التلقائي
+      if (document.getElementById('autoUpdate').checked) {
+        setInterval(simulateRealTimeUpdate, 30000);
+      }
+    }
+    
+    // بدء النظام
+    initStatsSystem();
+  });
+</script>
+  <!-- قسم الانضمام -->
+  <section class="section" id="apply">
+    <h2 class="section-title">انضم إلى الإمبراطورية</h2>
+    
+    <div class="section-box fade-in">
+      <div class="section-content">
+        <p>
+          ابحث عن التحدي؟ تريد أن تكون جزءاً من أسطورة؟ <span style="color: var(--primary-yellow); font-weight: 800;">GANG VAGOS</span> تبحث عن الأعضاء الأقوياء، المخلصين، والطموحين. 
+          إذا كنت تمتلك الشجاعة والولاء، فالإمبراطورية الصفراء تنتظرك.
+        </p>
+        <p>
+          نحن لا نأخذ كل من يطرق بابنا، بل نختار من يستحق حمل اسم VAGOS. إذا كنت تعتقد أنك تمتلك ما يلزم، قدم طلبك الآن وكن جزءاً من أسطورة تُروى في كل أركان المدينة.
+        </p>
+        
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="pages/apply.html" class="btn" style="padding: 18px 50px; font-size: 1.3rem;">
+            <i class="fas fa-crown"></i> كن جزءاً من الأسطورة
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- الفوتر -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">GANG VAGOS</div>
+      <div class="footer-tagline">الإمبراطورية الصفراء</div>
+      
+      <div class="social-links">
+        <a href="https://discord.gg/T8bbPu8X" class="social-link"><i class="fab fa-discord"></i></a>
+        <a href="https://x.com/Simba_RP_" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/channel/UCZ1f8s1teE-LBTWzuUIIDGQ" class="social-link"><i class="fab fa-youtube"></i></a>
+        <a href="https://t.me/+LFPGm6SFPX9kNmM0" class="social-link"><i class="fab fa-telegram"></i></a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© <span id="currentYear">2024</span> GANG VAGOS | YELLOW EMPIRE - جميع الحقوق محفوظة</p>
+        <p style="margin-top: 10px; color: var(--primary-yellow); font-weight: 600;">
+          اللون الأصفر هويتنا، الشارع مملكتنا، والإمبراطورية مصيرنا
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === نظام المشرفين المتقدم ===
+    
+    // بيانات المشرفين المسموحين
+    const ADMIN_CREDENTIALS = [
+      { username: "admin", password: "VAGOS2024", role: "superadmin", name: "المشرف الأعلى", avatar: "SA" },
+      { username: "moderator", password: "MOD123", role: "moderator", name: "المراقب العام", avatar: "M" },
+      { username: "darkness", password: "DARK123", role: "admin", name: "داركنيس", avatar: "D" },
+      { username: "pvp", password: "PVP123", role: "admin", name: "بي في بي", avatar: "P" }
+    ];
+    
+    let isAdminLoggedIn = false;
+    let currentAdmin = null;
+    
+    // عناصر النظام
+    const adminMainBtn = document.getElementById('adminMainBtn');
+    const adminSubButtons = document.getElementById('adminSubButtons');
+    const adminLoginModal = document.getElementById('adminLoginModal');
+    const adminQuickPanel = document.getElementById('adminQuickPanel');
+    const adminAlerts = document.getElementById('adminAlerts');
+    const advancedAdminPanel = document.getElementById('advancedAdminPanel');
+    const adminModeIndicator = document.getElementById('adminModeIndicator');
+    const securityOverlay = document.getElementById('securityOverlay');
+    
+    // تفعيل زر المشرفين الرئيسي
+    adminMainBtn.addEventListener('click', function() {
+      if (isAdminLoggedIn) {
+        // إذا كان مسجل دخول، إظهار الأزرار الفرعية
+        adminSubButtons.classList.toggle('active');
+      } else {
+        // إذا لم يكن مسجل دخول، إظهار نافذة الدخول
+        adminLoginModal.classList.add('active');
+        document.getElementById('adminUsername').focus();
+      }
+    });
+    
+    // إغلاق نافذة الدخول
+    document.getElementById('cancelLoginBtn').addEventListener('click', function() {
+      adminLoginModal.classList.remove('active');
+      resetLoginForm();
+    });
+    
+    // النقر خارج نافذة الدخول لإغلاقها
+    adminLoginModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        adminLoginModal.classList.remove('active');
+        resetLoginForm();
+      }
+    });
+    
+    // معالجة تسجيل الدخول
+    document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const role = document.getElementById('adminRole').value;
+      
+      const errorElement = document.getElementById('loginError');
+      const successElement = document.getElementById('loginSuccess');
+      
+      // إخفاء الرسائل السابقة
+      errorElement.style.display = 'none';
+      successElement.style.display = 'none';
+      
+      // التحقق من البيانات
+      const validAdmin = ADMIN_CREDENTIALS.find(admin => 
+        admin.username === username && 
+        admin.password === password && 
+        admin.role === role
+      );
+      
+      if (validAdmin) {
+        // تسجيل الدخول الناجح
+        currentAdmin = validAdmin;
+        isAdminLoggedIn = true;
+        
+        // إظهار رسالة النجاح
+        document.getElementById('successMessage').textContent = `مرحباً ${validAdmin.name}!`;
+        successElement.style.display = 'block';
+        
+        // تحديث واجهة المستخدم
+        setTimeout(() => {
+          adminLoginModal.classList.remove('active');
+          resetLoginForm();
+          
+          // إظهار لوحة التحكم
+          showAdminPanel();
+          
+          // إظهار التنبيه
+          showAlert('نجاح', 'تم تسجيل الدخول بنجاح', 'success');
+          
+          // تسجيل النشاط
+          logAdminActivity('تسجيل دخول', `${validAdmin.name} سجل دخول بنجاح`);
+        }, 1500);
+      } else {
+        // فشل الدخول
+        document.getElementById('errorMessage').textContent = 'بيانات الدخول غير صحيحة أو الصفة غير مطابقة';
+        errorElement.style.display = 'block';
+        
+        // تأثير اهتزاز
+        document.getElementById('adminLoginForm').style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          document.getElementById('adminLoginForm').style.animation = '';
+        }, 500);
+        
+        // تسجيل محاولة فاشلة
+        logAdminActivity('محاولة دخول فاشلة', `محاولة دخول باسم ${username}`);
+      }
+    });
+    
+    // إعادة تعيين نموذج الدخول
+    function resetLoginForm() {
+      document.getElementById('adminLoginForm').reset();
+      document.getElementById('loginError').style.display = 'none';
+      document.getElementById('loginSuccess').style.display = 'none';
+    }
+    
+    // إظهار لوحة التحكم
+    function showAdminPanel() {
+      // تحديث البيانات في اللوحة
+      updatePanelStats();
+      
+      // إظهار اللوحة
+      adminQuickPanel.classList.add('active');
+      
+      // إظهار شريط المشرف المتقدم
+      advancedAdminPanel.classList.add('active');
+      adminModeIndicator.classList.add('active');
+      
+      // تحديث معلومات المشرف
+      document.getElementById('adminName').textContent = currentAdmin.name;
+      document.getElementById('adminRoleText').textContent = 
+        currentAdmin.role === 'superadmin' ? 'المشرف الأعلى' :
+        currentAdmin.role === 'admin' ? 'مشرف' : 'مراقب';
+      document.getElementById('adminAvatar').textContent = currentAdmin.avatar;
+      
+      // إظهار أزرار المشرفين الفرعية
+      adminSubButtons.classList.add('active');
+      
+      // تفعيل اختصارات لوحة المفاتيح
+      activateAdminShortcuts();
+    }
+    
+    // تحديث إحصائيات اللوحة
+    function updatePanelStats() {
+      // محاكاة بيانات حية
+      document.getElementById('onlineStat').textContent = Math.floor(Math.random() * 50) + 30;
+      document.getElementById('reportsStat').textContent = Math.floor(Math.random() * 10) + 5;
+      document.getElementById('applicationsStat').textContent = Math.floor(Math.random() * 15) + 3;
+      
+      // تحديث العلامات
+      document.getElementById('statsBadge').textContent = 
+        Math.floor(Math.random() * 5) + 1;
+      document.getElementById('usersBadge').textContent = 
+        Math.floor(Math.random() * 8) + 2;
+      document.getElementById('reportsBadge').textContent = 
+        Math.floor(Math.random() * 4) + 1;
+    }
+    
+    // إغلاق لوحة التحكم
+    document.getElementById('panelCloseBtn').addEventListener('click', function() {
+      adminQuickPanel.classList.remove('active');
+    });
+    
+    // زر الخروج من وضع المشرف
+    document.getElementById('adminLogoutBtn').addEventListener('click', function() {
+      showSecurityCheck();
+    });
+    
+    // التحقق الأمني قبل الخروج
+    function showSecurityCheck() {
+      securityOverlay.classList.add('active');
+      document.querySelector('.security-code input').focus();
+    }
+    
+    // وظيفة للانتقال بين مربعات الإدخال
+    window.moveToNext = function(input, nextIndex) {
+      if (input.value.length === 1) {
+        const nextInput = input.parentElement.querySelector(`input:nth-child(${nextIndex + 1})`);
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    };
+    
+    // التحقق من رمز الأمان
+    document.getElementById('verifySecurityBtn').addEventListener('click', function() {
+      const codeInputs = document.querySelectorAll('.security-code input');
+      const enteredCode = Array.from(codeInputs).map(input => input.value).join('');
+      
+      const securityError = document.getElementById('securityError');
+      
+      if (enteredCode === '2024') {
+        // رمز صحيح - تسجيل الخروج
+        logoutAdmin();
+        securityOverlay.classList.remove('active');
+      } else {
+        // رمز خاطئ
+        securityError.style.display = 'block';
+        codeInputs.forEach(input => {
+          input.value = '';
+          input.style.borderColor = 'var(--danger-red)';
+        });
+        codeInputs[0].focus();
+        
+        setTimeout(() => {
+          securityError.style.display = 'none';
+          codeInputs.forEach(input => {
+            input.style.borderColor = 'var(--light-gray)';
+          });
+        }, 3000);
+      }
+    });
+    
+    // إلغاء التحقق الأمني
+    document.getElementById('cancelSecurityBtn').addEventListener('click', function() {
+      securityOverlay.classList.remove('active');
+      document.querySelectorAll('.security-code input').forEach(input => {
+        input.value = '';
+        input.style.borderColor = 'var(--light-gray)';
+      });
+    });
+    
+    // تسجيل خروج المشرف
+    function logoutAdmin() {
+      isAdminLoggedIn = false;
+      currentAdmin = null;
+      
+      // إخفاء عناصر المشرف
+      adminSubButtons.classList.remove('active');
+      adminQuickPanel.classList.remove('active');
+      advancedAdminPanel.classList.remove('active');
+      adminModeIndicator.classList.remove('active');
+      
+      // إظهار تنبيه الخروج
+      showAlert('معلومات', 'تم تسجيل الخروج بنجاح', 'info');
+      
+      // تسجيل النشاط
+      logAdminActivity('تسجيل خروج', 'المشرف سجل خروجه');
+      
+      // إلغاء اختصارات لوحة المفاتيح
+      deactivateAdminShortcuts();
+    }
+    
+    // إظهار تنبيه
+    function showAlert(title, message, type = 'info') {
+      const alert = document.createElement('div');
+      alert.className = `admin-alert ${type}`;
+      alert.innerHTML = `
+        <div class="admin-alert-icon">
+          ${type === 'success' ? '✅' : 
+            type === 'error' ? '❌' : 
+            type === 'warning' ? '⚠️' : 'ℹ️'}
+        </div>
+        <div class="admin-alert-content">
+          <div class="admin-alert-title">${title}</div>
+          <div class="admin-alert-message">${message}</div>
+        </div>
+        <button class="admin-alert-close">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      adminAlerts.appendChild(alert);
+      
+      // إغلاق التنبيه عند النقر على الزر
+      alert.querySelector('.admin-alert-close').addEventListener('click', function() {
+        alert.style.animation = 'slideInRight 0.3s ease reverse';
+        setTimeout(() => {
+          alert.remove();
+        }, 300);
+      });
+      
+      // إزالة التنبيه تلقائياً بعد 5 ثواني
+      setTimeout(() => {
+        if (alert.parentElement) {
+          alert.style.animation = 'slideInRight 0.3s ease reverse';
+          setTimeout(() => {
+            if (alert.parentElement) {
+              alert.remove();
+            }
+          }, 300);
+        }
+      }, 5000);
+    }
+    
+    // تسجيل نشاط المشرف
+    function logAdminActivity(action, details) {
+      const log = {
+        timestamp: new Date().toLocaleString('ar-SA'),
+        admin: currentAdmin ? currentAdmin.name : 'غير معروف',
+        action: action,
+        details: details,
+        ip: '192.168.1.' + Math.floor(Math.random() * 255)
+      };
+      
+      // يمكن حفظ السجلات في localStorage أو إرسالها للخادم
+      console.log('نشاط المشرف:', log);
+      
+      // إظهار تنبيه للسجلات المهمة
+      if (action.includes('دخول') || action.includes('خروج')) {
+        showAlert('نشاط النظام', `${action}: ${details}`, 'info');
+      }
+    }
+    
+    // تفعيل اختصارات لوحة المفاتيح للمشرفين
+    function activateAdminShortcuts() {
+      document.addEventListener('keydown', handleAdminShortcuts);
+    }
+    
+    // إلغاء اختصارات لوحة المفاتيح
+    function deactivateAdminShortcuts() {
+      document.removeEventListener('keydown', handleAdminShortcuts);
+    }
+    
+    // معالجة اختصارات لوحة المفاتيح
+    function handleAdminShortcuts(e) {
+      // فقط عندما يكون المشرف مسجل الدخول
+      if (!isAdminLoggedIn) return;
+      
+      // Ctrl + Alt + A: إظهار/إخفاء لوحة التحكم
+      if (e.ctrlKey && e.altKey && e.key === 'a') {
+        e.preventDefault();
+        adminQuickPanel.classList.toggle('active');
+      }
+      
+      // Ctrl + Alt + L: تسجيل الخروج
+      if (e.ctrlKey && e.altKey && e.key === 'l') {
+        e.preventDefault();
+        showSecurityCheck();
+      }
+      
+      // Ctrl + Alt + N: تنبيه جديد
+      if (e.ctrlKey && e.altKey && e.key === 'n') {
+        e.preventDefault();
+        showAlert('اختصار', 'تم إنشاء تنبيف جديد من خلال الاختصار', 'success');
+      }
+    }
+    
+    // وظائف الأزرار الفرعية
+    document.getElementById('adminStatsBtn').addEventListener('click', function() {
+      adminQuickPanel.classList.add('active');
+      updatePanelStats();
+      showAlert('الإحصائيات', 'تم تحديث الإحصائيات بنجاح', 'success');
+    });
+    
+    document.getElementById('adminUsersBtn').addEventListener('click', function() {
+      // محاكاة فتح صفحة الأعضاء مع صلاحيات المشرف
+      showAlert('إدارة الأعضاء', 'جاري فتح قائمة الأعضاء...', 'info');
+      setTimeout(() => {
+        // يمكن توجيه المستخدم إلى صفحة الأعضاء مع وضع المشرف
+        window.open('pages/members.html?admin=true', '_blank');
+      }, 1000);
+    });
+    
+    document.getElementById('adminReportsBtn').addEventListener('click', function() {
+      showAlert('التقارير', 'عرض التقارير المعلقة', 'warning');
+      // محاكاة تحميل التقارير
+      setTimeout(() => {
+        document.getElementById('reportsBadge').textContent = '0';
+        showAlert('التقارير', 'تم معالجة جميع التقارير', 'success');
+      }, 2000);
+    });
+    
+    document.getElementById('adminSettingsBtn').addEventListener('click', function() {
+      showAlert('الإعدادات', 'فتح إعدادات النظام', 'info');
+    });
+    
+    // وظائف الأزرار السريعة
+    document.getElementById('quickBanBtn').addEventListener('click', function() {
+      const playerName = prompt('أدخل اسم اللاعب للحظر:');
+      if (playerName) {
+        const reason = prompt('أدخل سبب الحظر:');
+        if (reason) {
+          showAlert('حظر لاعب', `تم حظر ${playerName} بسبب: ${reason}`, 'warning');
+          logAdminActivity('حظر لاعب', `${playerName} - ${reason}`);
+        }
+      }
+    });
+    
+    document.getElementById('quickMessageBtn').addEventListener('click', function() {
+      const message = prompt('أدخل الرسالة للإعلان العام:');
+      if (message) {
+        showAlert('إعلان عام', `تم إرسال الإعلان: ${message}`, 'success');
+        logAdminActivity('إعلان عام', message);
+      }
+    });
+    
+    document.getElementById('quickRestartBtn').addEventListener('click', function() {
+      if (confirm('هل أنت متأكد من إعادة تشغيل النظام؟')) {
+        showAlert('إعادة التشغيل', 'جاري إعادة تشغيل النظام...', 'warning');
+        setTimeout(() => {
+          showAlert('إعادة التشغيل', 'تم إعادة تشغيل النظام بنجاح', 'success');
+          logAdminActivity('إعادة تشغيل', 'تم إعادة تشغيل النظام');
+        }, 3000);
+      }
+    });
+    
+    document.getElementById('fullAdminBtn').addEventListener('click', function() {
+      showAlert('لوحة التحكم', 'جاري فتح لوحة التحكم الكاملة...', 'info');
+      // يمكن توجيه المستخدم إلى صفحة الإدارة الكاملة
+      setTimeout(() => {
+        window.open('pages/admin.html', '_blank');
+      }, 1500);
+    });
+    
+    // وظائف شريط الأدوات المتقدم
+    document.getElementById('adminBroadcastBtn').addEventListener('click', function() {
+      const message = prompt('أدخل رسالة البث لجميع اللاعبين:');
+      if (message) {
+        showAlert('بث عام', `تم البث: ${message}`, 'success');
+        logAdminActivity('بث عام', message);
+      }
+    });
+    
+    document.getElementById('adminPlayersBtn').addEventListener('click', function() {
+      showAlert('إدارة اللاعبين', 'فتح قائمة إدارة اللاعبين', 'info');
+    });
+    
+    document.getElementById('adminLogsBtn').addEventListener('click', function() {
+      showAlert('سجلات النظام', 'عرض سجلات النظام الكاملة', 'info');
+    });
+    
+    // === وظائف الموقع الأساسية ===
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // تبديل القائمة المتنقلة
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.innerHTML = navMenu.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+      
+      // إغلاق القائمة عند النقر على رابط
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // تأثير التمرير للشريط العلوي
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.7)';
+        } else {
+          navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+        }
+      });
+      
+      // عدادات الإحصاءات المتحركة
+      function animateCounter(elementId, target, duration = 2000) {
+        const element = document.getElementById(elementId);
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(start);
+          }
+        }, 16);
+      }
+      
+      // تفعيل العدادات عند التمرير إليها
+      const statsSection = document.querySelector('.stats-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter('memberCount', 180);
+            animateCounter('territoryCount', 12);
+            animateCounter('yearCount', 5);
+            animateCounter('missionCount', 347);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      if (statsSection) {
+        observer.observe(statsSection);
+      }
+      
+      // تأثير الظهور للعناصر
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        fadeObserver.observe(element);
+      });
+      
+      // التمرير السلس للروابط الداخلية
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          
+          if (href === '#') return;
+          
+          e.preventDefault();
+          const targetElement = document.querySelector(href);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // تحديث السنة في الفوتر تلقائياً
+      const currentYear = new Date().getFullYear();
+      document.getElementById('currentYear').textContent = currentYear;
+      
+      // تأثير الكتابة للعنوان
+      const typingText = document.querySelector('.typing-text');
+      if (typingText) {
+        setTimeout(() => {
+          typingText.style.borderRight = 'none';
+        }, 4000);
+      }
+      
+      // محاكاة بيانات النظام
+      simulateSystemData();
+    });
+    
+    // محاكاة بيانات النظام
+    function simulateSystemData() {
+      // تحديث الإحصائيات كل 30 ثانية
+      setInterval(() => {
+        if (isAdminLoggedIn) {
+          updatePanelStats();
+        }
+      }, 30000);
+      
+      // تنبيهات تلقائية للمشرفين
+      setInterval(() => {
+        if (isAdminLoggedIn && Math.random() > 0.7) {
+          const alerts = [
+            {title: 'تقرير جديد', message: 'هناك تقرير جديد يحتاج مراجعة', type: 'warning'},
+            {title: 'طلب انضمام', message: 'هناك طلب انضمام جديد', type: 'info'},
+            {title: 'مشكلة في الخادم', message: 'تم اكتشاف مشكلة طفيفة في الخادم', type: 'error'},
+            {title: 'نشاط مشبوه', message: 'تم رصد نشاط مشبوه من لاعب', type: 'warning'}
+          ];
+          
+          const randomAlert = alerts[Math.floor(Math.random() * alerts.length)];
+          showAlert(randomAlert.title, randomAlert.message, randomAlert.type);
+        }
+      }, 60000);
+    }
+    
+    // تأثير عند تحميل الصفحة
+    window.addEventListener('load', function() {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+        
+        // إظهار رسالة ترحيب
+        showAlert('مرحباً', 'مرحباً بك في إمبراطورية VAGOS', 'info');
+        
+        // التحقق من وجود جلسة مشرف سابقة
+        checkPreviousSession();
+      }, 100);
+    });
+    
+    // التحقق من جلسة المشرف السابقة
+    function checkPreviousSession() {
+      const savedSession = localStorage.getItem('vagosAdminSession');
+      if (savedSession) {
+        try {
+          const session = JSON.parse(savedSession);
+          const now = new Date();
+          const sessionTime = new Date(session.timestamp);
+          
+          // التحقق من أن الجلسة حديثة (أقل من ساعة)
+          if (now - sessionTime < 3600000) {
+            const validAdmin = ADMIN_CREDENTIALS.find(admin => 
+              admin.username === session.username
+            );
+            
+            if (validAdmin) {
+              // تسجيل الدخول التلقائي
+              currentAdmin = validAdmin;
+              isAdminLoggedIn = true;
+              showAdminPanel();
+              showAlert('استعادة الجلسة', 'تم استعادة جلسة المشرف السابقة', 'success');
+            }
+          }
+        } catch (e) {
+          console.log('خطأ في استعادة الجلسة:', e);
+        }
+      }
+    }
+    
+    // حفظ جلسة المشرف
+    function saveAdminSession() {
+      if (currentAdmin) {
+        const session = {
+          username: currentAdmin.username,
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem('vagosAdminSession', JSON.stringify(session));
+      }
+    }
+    
+    // حفظ الجلسة بشكل دوري
+    setInterval(() => {
+      if (isAdminLoggedIn) {
+        saveAdminSession();
+      }
+    }, 300000); // كل 5 دقائق
+  </script>
+</body>
+</html>

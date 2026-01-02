@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جيش الإمبراطورية | GANG VAGOS | YELLOW EMPIRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --dark-yellow: #FFC107;
+      --gold-yellow: #FFB800;
+      --yellow-glow: #FFE55C;
+      --primary-black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --light-gray: #3A3A3A;
+      --text-light: #F5F5F5;
+      --text-gray: #AAAAAA;
+      --shadow-yellow: rgba(255, 215, 0, 0.3);
+      --leader-color: #FFD700;
+      --co-leader-color: #FFA500;
+      --lieutenant-color: #FFC107;
+      --member-color: #FFD700;
+      --recruit-color: #FFB800;
+      --success-green: #28a745;
+      --active-green: #00cc00;
+      --away-orange: #ff9900;
+      --offline-gray: #666666;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Scheherazade New', sans-serif;
+    }
+    
+    body {
+      background-color: var(--primary-black);
+      color: var(--text-light);
+      line-height: 1.7;
+      direction: rtl;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)),
+        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    /* إخفاء شريط التمرير */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-yellow);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--dark-yellow);
+    }
+    
+    /* شريط التنقل */
+    nav.navbar {
+      background-color: rgba(26, 26, 26, 0.95);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary-yellow);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .nav-brand i {
+      font-size: 1.5rem;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 20px 25px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav a:hover {
+      color: var(--primary-yellow);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-yellow);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--primary-yellow);
+    }
+    
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    .nav-cta {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black) !important;
+      padding: 10px 25px !important;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+    
+    .nav-cta:hover {
+      background-color: var(--dark-yellow);
+      color: var(--primary-black) !important;
+    }
+    
+    .nav-cta::after {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-yellow);
+      cursor: pointer;
+    }
+    
+    /* الهيدر */
+    .members-header {
+      text-align: center;
+      padding: 80px 20px 50px;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .members-logo {
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+      color: var(--primary-black);
+      font-size: 3.5rem;
+      line-height: 120px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+      border: 3px solid var(--primary-yellow);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+    }
+    
+    .members-header h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      margin-bottom: 15px;
+    }
+    
+    .members-header .tagline {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 30px;
+      position: relative;
+      padding: 10px 0;
+    }
+    
+    .tagline::before, .tagline::after {
+      content: "•";
+      color: var(--primary-yellow);
+      margin: 0 15px;
+      font-size: 1.8rem;
+    }
+    
+    /* إحصائيات الإمبراطورية */
+    .gang-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 40px;
+      border: 2px solid var(--primary-yellow);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gang-stats::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 25px;
+      min-width: 220px;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .stat-icon {
+      font-size: 3.5rem;
+      color: var(--primary-yellow);
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .stat-description {
+      color: var(--text-gray);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    /* هيكل الإمبراطورية */
+    .gang-structure {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      color: var(--primary-yellow);
+      font-size: 2.5rem;
+      margin: 60px 0 40px;
+      padding-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      border-radius: 2px;
+    }
+    
+    /* مخطط هيكل الإمبراطورية */
+    .structure-chart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 50px 0;
+      position: relative;
+    }
+    
+    .level {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      width: 100%;
+      position: relative;
+    }
+    
+    .level-title {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      position: relative;
+      padding: 10px;
+      background-color: rgba(255, 215, 0, 0.1);
+      border-radius: 10px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    /* بطاقات المحاربين */
+    .member-card {
+      background-color: rgba(40, 40, 40, 0.9);
+      border-radius: 15px;
+      padding: 35px 25px;
+      margin: 20px;
+      width: 300px;
+      text-align: center;
+      transition: all 0.4s ease;
+      border-top: 6px solid;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      z-index: 2;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    }
+    
+    .member-card.leader {
+      border-color: var(--leader-color);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    .member-card.co-leader {
+      border-color: var(--co-leader-color);
+      box-shadow: 0 15px 30px rgba(255, 165, 0, 0.3);
+    }
+    
+    .member-card.lieutenant {
+      border-color: var(--lieutenant-color);
+      box-shadow: 0 15px 30px rgba(255, 193, 7, 0.3);
+    }
+    
+    .member-card.member {
+      border-color: var(--member-color);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+    }
+    
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+    
+    .member-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .member-card:hover::after {
+      opacity: 1;
+    }
+    
+    .member-rank {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .member-name {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      color: white;
+      position: relative;
+      z-index: 1;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .member-role {
+      color: var(--primary-yellow);
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 1;
+      font-weight: 700;
+    }
+    
+    .member-info {
+      color: #ccc;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+      min-height: 80px;
+    }
+    
+    .member-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 2px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    
+    .stat-label {
+      font-size: 1rem;
+      color: var(--text-gray);
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    
+    /* ألوان الرتب */
+    .rank-leader { color: var(--leader-color); }
+    .rank-co-leader { color: var(--co-leader-color); }
+    .rank-lieutenant { color: var(--lieutenant-color); }
+    .rank-member { color: var(--member-color); }
+    .rank-recruit { color: var(--recruit-color); }
+    
+    /* خطوط التوصيل في الهيكل */
+    .connections {
+      position: relative;
+      height: 60px;
+      width: 80%;
+      margin: 0 auto;
+    }
+    
+    .connection-line {
+      position: absolute;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* بحث وفلترة المحاربين */
+    .search-container {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      border: 2px solid var(--light-gray);
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 20px 25px;
+      background-color: rgba(40, 40, 40, 0.9);
+      border: 3px solid var(--light-gray);
+      border-radius: 15px;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      text-align: right;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      background-color: rgba(50, 50, 50, 0.9);
+    }
+    
+    .filter-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .filter-btn {
+      padding: 15px 35px;
+      background-color: rgba(40, 40, 40, 0.9);
+      border: 2px solid var(--light-gray);
+      border-radius: 30px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      border-color: var(--primary-yellow);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* قائمة المحاربين */
+    .members-list {
+      max-width: 1200px;
+      margin: 60px auto;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      border: 2px solid var(--primary-yellow);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .members-list::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .members-table th {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.2));
+      color: var(--text-light);
+      padding: 20px;
+      text-align: right;
+      border-bottom: 3px solid var(--primary-yellow);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    
+    .members-table td {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      color: #ccc;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .members-table tr:hover {
+      background-color: rgba(255, 215, 0, 0.1);
+    }
+    
+    .members-table tr:hover td {
+      color: white;
+    }
+    
+    .rank-badge {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      border: 2px solid;
+    }
+    
+    .badge-leader { 
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.2)); 
+      color: var(--leader-color); 
+      border-color: var(--leader-color);
+    }
+    
+    .badge-co-leader { 
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.3), rgba(255, 140, 0, 0.2)); 
+      color: var(--co-leader-color); 
+      border-color: var(--co-leader-color);
+    }
+    
+    .badge-lieutenant { 
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), rgba(255, 179, 0, 0.2)); 
+      color: var(--lieutenant-color); 
+      border-color: var(--lieutenant-color);
+    }
+    
+    .badge-member { 
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.2)); 
+      color: var(--member-color); 
+      border-color: var(--member-color);
+    }
+    
+    .badge-recruit { 
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.3), rgba(255, 160, 0, 0.2)); 
+      color: var(--recruit-color); 
+      border-color: var(--recruit-color);
+    }
+    
+    /* رابط الرجوع */
+    .back-link {
+      display: inline-block;
+      color: var(--primary-yellow);
+      text-decoration: none;
+      font-size: 1.4rem;
+      margin-top: 40px;
+      padding: 18px 45px;
+      border: 3px solid var(--primary-yellow);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-weight: 800;
+      background-color: rgba(255, 215, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .back-link:hover {
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+      letter-spacing: 1px;
+    }
+    
+    .back-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-yellow), var(--primary-yellow));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      border-radius: 30px;
+    }
+    
+    .back-link:hover::before {
+      opacity: 1;
+    }
+    
+    .back-link i {
+      margin-right: 12px;
+    }
+    
+    /* تصميم متجاوب */
+    @media (max-width: 1100px) {
+      .member-card {
+        width: 280px;
+      }
+      
+      .members-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .stat-item {
+        min-width: 180px;
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid var(--primary-yellow);
+        z-index: 1000;
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .member-card {
+        width: 90%;
+        max-width: 350px;
+      }
+      
+      .stat-item {
+        min-width: 140px;
+        padding: 15px;
+      }
+      
+      .stat-number {
+        font-size: 2.2rem;
+      }
+      
+      .stat-icon {
+        font-size: 2.8rem;
+      }
+      
+      .members-header h1 {
+        font-size: 2rem;
+      }
+      
+      .members-header .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .members-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .gang-stats, .search-container, .members-list {
+        padding: 30px 20px;
+        margin: 40px 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .members-logo {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+        line-height: 100px;
+      }
+      
+      .members-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .member-name {
+        font-size: 1.5rem;
+      }
+      
+      .member-info {
+        font-size: 1rem;
+      }
+      
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      
+      .members-table th, .members-table td {
+        padding: 15px 10px;
+        font-size: 1rem;
+      }
+    }
+    
+    /* تأثيرات الظهور */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* تأثيرات الحالة */
+    .status-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    
+    .status-active { background-color: var(--active-green); box-shadow: 0 0 10px rgba(0, 204, 0, 0.7); }
+    .status-away { background-color: var(--away-orange); box-shadow: 0 0 10px rgba(255, 153, 0, 0.7); }
+    .status-offline { background-color: var(--offline-gray); }
+    
+    /* رسالة الترحيب */
+    .welcome-message {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(255, 215, 0, 0.1);
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 1000px;
+      border: 2px solid var(--primary-yellow);
+    }
+    
+    .welcome-message h3 {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .welcome-message p {
+      color: #ccc;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <i class="fas fa-crown"></i>
+        <span>GANG VAGOS</span>
+      </a>
+      
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="apply.html"><i class="fas fa-user-plus"></i> التقديم</a></li>
+        <li><a href="rules.html"><i class="fas fa-gavel"></i> القوانين</a></li>
+        <li><a href="contact.html"><i class="fas fa-phone-alt"></i> التواصل</a></li>
+        <li><a href="members.html" class="active"><i class="fas fa-users"></i> الجيش</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- الهيدر -->
+  <header class="members-header">
+    <div class="members-logo">⚔️</div>
+    <h1>جيش الإمبراطورية الصفراء</h1>
+    <p class="tagline">GANG VAGOS | YELLOW EMPIRE</p>
+    <div class="welcome-message fade-in">
+      <h3><i class="fas fa-users"></i> قوة الإمبراطورية</h3>
+      <p>تعرف على جيش الإمبراطورية الصفراء. كل محارب له دوره ومسؤولياته في المعارك والاستراتيجيات الإمبراطورية.</p>
+    </div>
+  </header>
+  
+  <!-- إحصائيات الإمبراطورية -->
+  <div class="gang-stats fade-in">
+    <div class="stat-item">
+      <div class="stat-icon"><i class="fas fa-user-shield"></i></div>
+      <div class="stat-number" id="totalMembers">32</div>
+      <div class="stat-description">محارب إمبراطوري</div>
+    </div>
+    
+    <div class="stat-item">
+      <div class="stat-icon"><i class="fas fa-calendar-star"></i></div>
+      <div class="stat-number" id="activeDays">167</div>
+      <div class="stat-description">يوم في المعركة</div>
+    </div>
+    
+    <div class="stat-item">
+      <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+      <div class="stat-number" id="successfulOps">58</div>
+      <div class="stat-description">معركة منتصر فيها</div>
+    </div>
+    
+    <div class="stat-item">
+      <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="stat-number" id="loyaltyRate">96%</div>
+      <div class="stat-description">معدل الولاء الإمبراطوري</div>
+    </div>
+  </div>
+  
+  <!-- هيكل الإمبراطورية -->
+  <div class="gang-structure">
+    <h2 class="section-title">الهيكل الإمبراطوري للمحاربين</h2>
+    <p style="color: #ccc; font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px;">يتبع جيش VAGOS نظاماً إمبراطورياً هرمياً لضمان التنظيم والفعالية في المعارك والعمليات الإستراتيجية.</p>
+    
+    <!-- مخطط الهيكل -->
+    <div class="structure-chart">
+      <!-- المستوى 1: الإمبراطور -->
+      <div class="level">
+        <div class="level-title">العرش الإمبراطوري</div>
+        <div class="member-card leader fade-in">
+          <div class="member-rank rank-leader">👑</div>
+          <div class="member-name">EL JEFE</div>
+          <div class="member-role">الإمبراطور الأعلى</div>
+          <div class="member-info">
+            مؤسس الإمبراطورية الصفراء والمسؤول عن جميع القرارات الاستراتيجية والتخطيط الإمبراطوري العام.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">سلطة إمبراطورية</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">365</div>
+              <div class="stat-label">يوم إمبراطوري</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- خط التوصيل -->
+      <div class="connections">
+        <div class="connection-line"></div>
+      </div>
+      
+      <!-- المستوى 2: قادة المعارك -->
+      <div class="level">
+        <div class="level-title">قادة المعارك الإمبراطورية</div>
+        <div class="member-card co-leader fade-in">
+          <div class="member-rank rank-co-leader">⚔️</div>
+          <div class="member-name">EL SICARIO</div>
+          <div class="member-role">قائد العمليات الحربية</div>
+          <div class="member-info">
+            يدير المعارك اليومية ويتولى القيادة الميدانية في غياب الإمبراطور. مسؤول عن تكتيكات المعارك.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">90%</div>
+              <div class="stat-label">سلطة قتالية</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">320</div>
+              <div class="stat-label">يوم في المعركة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- خط التوصيل -->
+      <div class="connections">
+        <div class="connection-line"></div>
+      </div>
+      
+      <!-- المستوى 3: الضباط الإمبراطوريين -->
+      <div class="level">
+        <div class="level-title">الضباط الإمبراطوريون</div>
+        
+        <div class="member-card lieutenant fade-in">
+          <div class="member-rank rank-lieutenant">🔫</div>
+          <div class="member-name">LA SOMBRA</div>
+          <div class="member-role">ضابط الاستخبارات</div>
+          <div class="member-info">
+            مسؤول عن جمع المعلومات الاستخباراتية وتحليل تحركات العصابات المنافسة والتخطيط للعمليات الخاصة.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">75%</div>
+              <div class="stat-label">سلطة استخباراتية</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">280</div>
+              <div class="stat-label">يوم في الخفاء</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="member-card lieutenant fade-in">
+          <div class="member-rank rank-lieutenant">🎯</div>
+          <div class="member-name">EL FRANCOTIRADOR</div>
+          <div class="member-role">ضبيق القناصة الإمبراطوري</div>
+          <div class="member-info">
+            يدرب ويدير فرقة القناصة الإمبراطورية. متخصص في العمليات بعيدة المدى والدعم الناري الاستراتيجي.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">70%</div>
+              <div class="stat-label">سلطة قنص</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">250</div>
+              <div class="stat-label">يوم في المراقبة</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="member-card lieutenant fade-in">
+          <div class="member-rank rank-lieutenant">🏎️</div>
+          <div class="member-name">EL CORREDOR</div>
+          <div class="member-role">ضابط المركبات الحربية</div>
+          <div class="member-info">
+            يدرب ويدير سائقي المركبات الإمبراطورية. خبير في عمليات الهروب والملاحقة والتفوق الحركي في المعارك.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">65%</div>
+              <div class="stat-label">سلطة حركية</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">230</div>
+              <div class="stat-label">يوم على الطريق</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- خط التوصيل -->
+      <div class="connections">
+        <div class="connection-line"></div>
+      </div>
+      
+      <!-- المستوى 4: المحاربون الإمبراطوريون -->
+      <div class="level">
+        <div class="level-title">المحاربون الإمبراطوريون</div>
+        
+        <div class="member-card member fade-in">
+          <div class="member-rank rank-member">🟡</div>
+          <div class="member-name">EL VENENO</div>
+          <div class="member-role">محارب - القناص الممتاز</div>
+          <div class="member-info">
+            متخصص في القنص بعيد المدى ودعم العمليات الإمبراطورية من مسافات آمنة. صاحب أعلى نسبة إصابة في الإمبراطورية.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">98%</div>
+              <div class="stat-label">دقة قنص</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">180</div>
+              <div class="stat-label">يوم إمبراطوري</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="member-card member fade-in">
+          <div class="member-rank rank-member">🟡</div>
+          <div class="member-name">EL FANTASMA</div>
+          <div class="member-role">محارب - سائق النخبة</div>
+          <div class="member-info">
+            خبير في الهرب والملاحقة وقيادة جميع أنواع المركبات في الظروف الصعبة. مسؤول عن عمليات الإخلاء السريع.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">42</div>
+              <div class="stat-label">هروب ناجح</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">150</div>
+              <div class="stat-label">يوم إمبراطوري</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="member-card member fade-in">
+          <div class="member-rank rank-member">🟡</div>
+          <div class="member-name">EL GOLPE</div>
+          <div class="member-role">محارب - قتال عنيف</div>
+          <div class="member-info">
+            متخصص في القتال القريب والاشتباكات المباشرة وحراسة مواقع الإمبراطورية. خبير في فنون القتال القريب.
+          </div>
+          <div class="member-stats">
+            <div class="stat">
+              <div class="stat-value">35</div>
+              <div class="stat-label">اشتباك مباشر</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">120</div>
+              <div class="stat-label">يوم إمبراطوري</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- بحث وفلترة المحاربين -->
+  <div class="search-container fade-in">
+    <h2 class="section-title">سجل المحاربين الإمبراطوري</h2>
+    <p style="color: #ccc; margin-bottom: 30px; font-size: 1.3rem;">ابحث عن محارب أو رتبة محددة في جيش الإمبراطورية الصفراء</p>
+    
+    <input type="text" class="search-box" placeholder="🔍 ابحث عن محارب بالاسم، الرتبة، أو المهمة..." id="memberSearch">
+    
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">
+        <i class="fas fa-users"></i> كل المحاربين
+      </button>
+      <button class="filter-btn" data-filter="leader">
+        <i class="fas fa-crown"></i> الإمبراطورية
+      </button>
+      <button class="filter-btn" data-filter="co-leader">
+        <i class="fas fa-chess-queen"></i> قادة المعارك
+      </button>
+      <button class="filter-btn" data-filter="lieutenant">
+        <i class="fas fa-chess-knight"></i> الضباط
+      </button>
+      <button class="filter-btn" data-filter="member">
+        <i class="fas fa-user-shield"></i> المحاربون
+      </button>
+    </div>
+  </div>
+  
+  <!-- قائمة كاملة بالمحاربين -->
+  <div class="members-list fade-in">
+    <h2 class="section-title">السجل الإمبراطوري الكامل</h2>
+    <p style="color: #ccc; margin-bottom: 30px; font-size: 1.3rem; text-align: center;">قائمة بجميع محاربي GANG VAGOS مع معلومات مفصلة عن رتبهم وتاريخ انضمامهم ومهامهم الإمبراطورية</p>
+    
+    <table class="members-table" id="membersTable">
+      <thead>
+        <tr>
+          <th>الاسم الإمبراطوري</th>
+          <th>الرتبة الإمبراطورية</th>
+          <th>تاريخ الولاء</th>
+          <th>المهمة الإمبراطورية</th>
+          <th>حالة المعركة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-rank="leader">
+          <td><strong>EL JEFE</strong></td>
+          <td><span class="rank-badge badge-leader">الإمبراطور الأعلى 👑</span></td>
+          <td>01/01/2023</td>
+          <td>التخطيط الاستراتيجي الإمبراطوري</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="co-leader">
+          <td><strong>EL SICARIO</strong></td>
+          <td><span class="rank-badge badge-co-leader">قائد العمليات الحربية ⚔️</span></td>
+          <td>15/01/2023</td>
+          <td>إدارة المعارك اليومية</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="lieutenant">
+          <td><strong>LA SOMBRA</strong></td>
+          <td><span class="rank-badge badge-lieutenant">ضابط الاستخبارات 🔫</span></td>
+          <td>05/02/2023</td>
+          <td>جمع المعلومات الاستخباراتية</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="lieutenant">
+          <td><strong>EL FRANCOTIRADOR</strong></td>
+          <td><span class="rank-badge badge-lieutenant">ضابط القناصة 🎯</span></td>
+          <td>12/02/2023</td>
+          <td>إدارة فرقة القناصة الإمبراطورية</td>
+          <td><span class="status-dot status-away"></span> <span style="color: var(--away-orange);">في مهمة خاصة</span></td>
+        </tr>
+        <tr data-rank="lieutenant">
+          <td><strong>EL CORREDOR</strong></td>
+          <td><span class="rank-badge badge-lieutenant">ضابط المركبات 🏎️</span></td>
+          <td>20/02/2023</td>
+          <td>تدريب وإدارة السائقين</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL VENENO</strong></td>
+          <td><span class="rank-badge badge-member">محارب قناص 🟡</span></td>
+          <td>01/03/2023</td>
+          <td>القنص بعيد المدى والدعم الناري</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL FANTASMA</strong></td>
+          <td><span class="rank-badge badge-member">محارب سائق 🟡</span></td>
+          <td>10/03/2023</td>
+          <td>الهروب والملاحقة والقيادة المتقدمة</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL GOLPE</strong></td>
+          <td><span class="rank-badge badge-member">محارب قتال 🟡</span></td>
+          <td>15/03/2023</td>
+          <td>القتال القريب وحراسة المواقع</td>
+          <td><span class="status-dot status-away"></span> <span style="color: var(--away-orange);">في تدريب متقدم</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL DISPARO</strong></td>
+          <td><span class="rank-badge badge-member">محارب دعم 🟡</span></td>
+          <td>22/03/2023</td>
+          <td>الدعم الناري والتغطية في المعارك</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL RASTREADOR</strong></td>
+          <td><span class="rank-badge badge-member">محارب استطلاع 🟡</span></td>
+          <td>30/03/2023</td>
+          <td>الاستطلاع وجمع المعلومات الميدانية</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL DINERO</strong></td>
+          <td><span class="rank-badge badge-member">محارب تمويل 🟡</span></td>
+          <td>05/04/2023</td>
+          <td>إدارة الموارد المالية للإمبراطورية</td>
+          <td><span class="status-dot status-active"></span> <span style="color: var(--active-green);">في المعركة</span></td>
+        </tr>
+        <tr data-rank="member">
+          <td><strong>EL NUEVO</strong></td>
+          <td><span class="rank-badge badge-recruit">محارب جديد 🟡</span></td>
+          <td>15/04/2023</td>
+          <td>تدريب أولي واستكشاف المهام</td>
+          <td><span class="status-dot status-away"></span> <span style="color: var(--away-orange);">في فترة التدريب</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- رابط الرجوع -->
+  <div style="text-align: center; margin: 60px 0 40px;">
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة إلى القلعة الإمبراطورية</a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // تبديل القائمة المتنقلة
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.innerHTML = navMenu.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+      
+      // إغلاق القائمة عند النقر على رابط
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // تأثير التمرير للشريط العلوي
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.7)';
+        } else {
+          navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+        }
+      });
+      
+      // فلترة المحاربين حسب الرتبة
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const memberRows = document.querySelectorAll('#membersTable tbody tr');
+      const searchInput = document.getElementById('memberSearch');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // إزالة الفعال من جميع الأزرار
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // إضافة الفعال للزر المختار
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          
+          // فلترة المحاربين
+          memberRows.forEach(row => {
+            if (filter === 'all' || row.getAttribute('data-rank') === filter) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // بحث المحاربين
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        memberRows.forEach(row => {
+          const rowText = row.textContent.toLowerCase();
+          const isVisible = rowText.includes(searchTerm);
+          row.style.display = isVisible ? '' : 'none';
+        });
+      });
+      
+      // تأثيرات الظهور للعناصر
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(40px)';
+        fadeObserver.observe(element);
+      });
+      
+      // تأثيرات الأزرار
+      const buttons = document.querySelectorAll('.filter-btn, .back-link');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(0) scale(1)';
+          }
+        });
+      });
+      
+      // تأثير عند التحميل
+      window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        
+        setTimeout(() => {
+          document.body.style.opacity = '1';
+        }, 100);
+      });
+      
+      // تأثيرات بطاقات المحاربين
+      const memberCards = document.querySelectorAll('.member-card');
+      memberCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px) rotateX(10deg)';
+        card.style.transition = 'opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease';
+        
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) rotateX(0)';
+        }, 300 + index * 200);
+      });
+      
+      // تأثيرات الجداول
+      const tableRows = document.querySelectorAll('#membersTable tbody tr');
+      tableRows.forEach((row, index) => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(30px)';
+        row.style.transition = 'opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease, display 0.3s ease';
+        
+        setTimeout(() => {
+          row.style.opacity = '1';
+          row.style.transform = 'translateX(0)';
+        }, 400 + index * 80);
+      });
+      
+      // تأثيرات الأرقام الإحصائية المتحركة
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      function animateCounter(elementId, target, duration = 2000) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(start);
+          }
+        }, 16);
+      }
+      
+      // تفعيل العدادات عند التمرير إليها
+      const statsSection = document.querySelector('.gang-stats');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter('totalMembers', 32);
+            animateCounter('activeDays', 167);
+            animateCounter('successfulOps', 58);
+            animateCounter('loyaltyRate', 96);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      if (statsSection) {
+        observer.observe(statsSection);
+      }
+      
+      // تأثيرات تفاعلية لبطاقات المحاربين
+      memberCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.boxShadow = '0 25px 50px rgba(255, 215, 0, 0.4)';
+          this.querySelector('.member-rank').style.transform = 'scale(1.2) rotate(5deg)';
+          this.querySelector('.member-rank').style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.5)';
+          this.querySelector('.member-rank').style.transform = 'scale(1) rotate(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

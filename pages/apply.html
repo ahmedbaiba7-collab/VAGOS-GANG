@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التقديم | VAGOS | Yellow Gang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --dark-yellow: #FFA500;
+      --gold: #FFC107;
+      --light-gold: #FFE44D;
+      --yellow-transparent: rgba(255, 215, 0, 0.1);
+      --yellow-transparent-dark: rgba(255, 215, 0, 0.2);
+      --primary-black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --light-gray: #3A3A3A;
+      --text-light: #F5F5F5;
+      --text-gray: #CCCCCC;
+      --form-bg: rgba(26, 26, 26, 0.98);
+      --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.4);
+      --gradient-yellow: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      --success-green: #2ecc71;
+      --warning-orange: #f39c12;
+      --danger-red: #e74c3c;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Scheherazade New', sans-serif;
+    }
+    
+    body {
+      background-color: var(--primary-black);
+      color: var(--text-light);
+      line-height: 1.6;
+      direction: rtl;
+      min-height: 100vh;
+      background-image: 
+        linear-gradient(rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.98)),
+        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding-bottom: 50px;
+    }
+    
+    /* شريط التنقل المحسن */
+    nav {
+      background-color: rgba(26, 26, 26, 0.98);
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      border-bottom: 3px solid var(--primary-yellow);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 20px 35px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      position: relative;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 4px;
+      background: var(--gradient-yellow);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover {
+      background-color: rgba(255, 215, 0, 0.15);
+      color: var(--primary-yellow);
+    }
+    
+    nav a:hover::after {
+      width: 80%;
+    }
+    
+    /* الهيدر المحسن */
+    header {
+      text-align: center;
+      padding: 70px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.08), transparent);
+      z-index: -1;
+    }
+    
+    .gang-title {
+      font-size: 4rem;
+      font-weight: 900;
+      background: var(--gradient-yellow);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+    
+    .gang-subtitle {
+      font-size: 2rem;
+      color: var(--text-light);
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+    
+    header p {
+      font-size: 1.3rem;
+      color: var(--text-gray);
+      max-width: 850px;
+      margin: 0 auto 50px;
+      line-height: 1.9;
+      font-weight: 300;
+    }
+    
+    .logo-container {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    .logo-large {
+      display: inline-block;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--primary-yellow);
+      background-color: rgba(26, 26, 26, 0.9);
+      font-size: 60px;
+      color: var(--primary-yellow);
+      line-height: 132px;
+      margin-bottom: 25px;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      z-index: 1;
+      animation: pulse-glow 3s infinite;
+    }
+    
+    .logo-large::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      bottom: -8px;
+      left: -8px;
+      border-radius: 50%;
+      background: var(--gradient-yellow);
+      z-index: -1;
+      opacity: 0.3;
+      filter: blur(10px);
+    }
+    
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+      50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+      100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+    }
+    
+    .logo-text {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      letter-spacing: 3px;
+      margin-top: 15px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 15px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* نموذج التقديم المحسن */
+    .form-container {
+      max-width: 900px;
+      margin: 50px auto;
+      background-color: var(--form-bg);
+      padding: 60px;
+      border-radius: 20px;
+      border: 3px solid var(--primary-yellow);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), var(--shadow-glow);
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--gradient-yellow);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+    
+    .form-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    
+    .form-header h2 {
+      color: var(--primary-yellow);
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 20px;
+    }
+    
+    .form-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 200px;
+      height: 5px;
+      background: var(--gradient-yellow);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .form-header p {
+      color: var(--text-gray);
+      font-size: 1.3rem;
+      margin-top: 30px;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.9;
+    }
+    
+    #applyForm {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group:hover {
+      transform: translateX(-8px);
+    }
+    
+    .form-group label {
+      color: var(--text-light);
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+    
+    .form-group label i {
+      color: var(--primary-yellow);
+      margin-left: 12px;
+      font-size: 1.2rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 18px 25px;
+      background-color: rgba(40, 40, 40, 0.95);
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      background-color: rgba(50, 50, 50, 0.95);
+      transform: translateY(-2px);
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #888;
+      font-weight: 300;
+    }
+    
+    .form-group textarea {
+      min-height: 180px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+    
+    /* زر الإرسال المحسن */
+    .submit-btn {
+      background: var(--gradient-yellow);
+      color: #000;
+      border: none;
+      padding: 22px 60px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      letter-spacing: 1px;
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(-2px) scale(1);
+    }
+    
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+      z-index: -1;
+      transition: transform 0.5s ease;
+      transform: translateX(-100%);
+    }
+    
+    .submit-btn:hover::before {
+      transform: translateX(0);
+    }
+    
+    /* رسالة النجاح المحسنة */
+    .success-message {
+      display: none;
+      background-color: rgba(20, 20, 20, 0.98);
+      border: 3px solid var(--primary-yellow);
+      border-radius: 20px;
+      padding: 50px;
+      text-align: center;
+      margin-top: 30px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .success-message::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+      z-index: -1;
+    }
+    
+    .success-icon {
+      font-size: 6rem;
+      color: var(--primary-yellow);
+      margin-bottom: 30px;
+      animation: successPulse 2s infinite;
+    }
+    
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .success-message h3 {
+      color: var(--primary-yellow);
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+    
+    .success-message p {
+      color: var(--text-gray);
+      font-size: 1.4rem;
+      margin-bottom: 35px;
+      line-height: 1.9;
+    }
+    
+    .success-details {
+      background-color: rgba(255, 215, 0, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 30px 0;
+      border-right: 4px solid var(--primary-yellow);
+    }
+    
+    .success-details h4 {
+      color: var(--primary-yellow);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .success-details p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    /* رابط الرجوع المحسن */
+    .back-link {
+      display: inline-block;
+      color: var(--primary-yellow);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 40px;
+      padding: 15px 40px;
+      border: 2px solid var(--primary-yellow);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .back-link:hover {
+      background-color: var(--primary-yellow);
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+    }
+    
+    .back-link i {
+      margin-right: 12px;
+    }
+    
+    /* استمارة الشروط المحسنة */
+    .terms {
+      background-color: rgba(40, 40, 40, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 20px;
+      border-right: 5px solid var(--dark-yellow);
+      position: relative;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .terms::before {
+      content: "⚖️";
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-yellow);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .terms h4 {
+      color: var(--primary-yellow);
+      margin-bottom: 25px;
+      font-size: 1.6rem;
+      font-weight: 900;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    
+    .terms ul {
+      padding-right: 30px;
+      color: var(--text-gray);
+    }
+    
+    .terms li {
+      margin-bottom: 18px;
+      position: relative;
+      padding-right: 25px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    .terms li::before {
+      content: "•";
+      color: var(--primary-yellow);
+      font-size: 2rem;
+      position: absolute;
+      right: 0;
+      top: -5px;
+    }
+    
+    .checkbox-group {
+      flex-direction: row;
+      align-items: center;
+      gap: 25px;
+      background-color: rgba(40, 40, 40, 0.7);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 25px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .checkbox-group input {
+      width: 28px;
+      height: 28px;
+      accent-color: var(--primary-yellow);
+      cursor: pointer;
+    }
+    
+    .checkbox-group label {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      line-height: 1.8;
+      cursor: pointer;
+    }
+    
+    /* تصميم متجاوب محسن */
+    @media (max-width: 1000px) {
+      .form-container {
+        margin: 40px 30px;
+        padding: 50px 40px;
+      }
+      
+      .gang-title {
+        font-size: 3.5rem;
+      }
+      
+      .logo-large {
+        width: 120px;
+        height: 120px;
+        font-size: 55px;
+        line-height: 112px;
+      }
+    }
+    
+    @media (max-width: 850px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        padding: 18px 25px;
+        font-size: 1.1rem;
+        flex: 1;
+        min-width: 150px;
+        text-align: center;
+      }
+      
+      .gang-title {
+        font-size: 3rem;
+      }
+      
+      .gang-subtitle {
+        font-size: 1.8rem;
+      }
+      
+      .form-header h2 {
+        font-size: 2.4rem;
+      }
+      
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 16px 22px;
+      }
+      
+      .submit-btn {
+        padding: 20px 50px;
+        font-size: 1.4rem;
+      }
+    }
+    
+    @media (max-width: 650px) {
+      .form-container {
+        padding: 40px 30px;
+        margin: 30px 20px;
+      }
+      
+      .gang-title {
+        font-size: 2.5rem;
+      }
+      
+      .gang-subtitle {
+        font-size: 1.6rem;
+      }
+      
+      .logo-large {
+        width: 100px;
+        height: 100px;
+        font-size: 45px;
+        line-height: 92px;
+      }
+      
+      .logo-text {
+        font-size: 2rem;
+      }
+      
+      .submit-btn {
+        padding: 18px 40px;
+        font-size: 1.3rem;
+      }
+      
+      .success-message {
+        padding: 40px 30px;
+      }
+      
+      .success-message h3 {
+        font-size: 2.2rem;
+      }
+      
+      .success-message p {
+        font-size: 1.2rem;
+      }
+      
+      .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      nav a {
+        min-width: 120px;
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+      
+      .gang-title {
+        font-size: 2.2rem;
+      }
+      
+      .gang-subtitle {
+        font-size: 1.4rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .form-header h2 {
+        font-size: 2rem;
+      }
+      
+      .form-header p {
+        font-size: 1.1rem;
+      }
+      
+      .terms li {
+        font-size: 1rem;
+      }
+    }
+    
+    /* رسالة تحذير محسنة */
+    .error-message {
+      color: var(--danger-red);
+      font-size: 1.1rem;
+      margin-top: 10px;
+      display: none;
+      padding-right: 8px;
+      font-weight: 600;
+      background-color: rgba(231, 76, 60, 0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      border-right: 3px solid var(--danger-red);
+    }
+    
+    .form-group.error input,
+    .form-group.error select,
+    .form-group.error textarea {
+      border-color: var(--danger-red);
+      box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+    }
+    
+    /* تأثيرات إضافية */
+    .badge {
+      display: inline-block;
+      background: var(--gradient-yellow);
+      color: #000;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 800;
+      margin: 0 8px 15px;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .badges-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    
+    .form-footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid rgba(255, 215, 0, 0.3);
+      color: var(--text-gray);
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    
+    /* تأثيرات الرفع */
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      transform: translateY(-3px);
+    }
+    
+    /* إضافة مؤشر التحميل */
+    .loader {
+      display: none;
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 215, 0, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-yellow);
+      animation: spin 1s ease-in-out infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* تحسين الإشعارات */
+    .notification {
+      position: fixed;
+      top: 100px;
+      left: 30px;
+      background-color: var(--medium-gray);
+      color: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2000;
+      min-width: 300px;
+      border-right: 5px solid;
+      animation: slideInLeft 0.5s ease;
+    }
+    
+    .notification.success {
+      border-color: var(--success-green);
+    }
+    
+    .notification.error {
+      border-color: var(--danger-red);
+    }
+    
+    .notification.warning {
+      border-color: var(--warning-orange);
+    }
+    
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav>
+    <a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="members.html"><i class="fas fa-users"></i> أعضاء VAGOS</a>
+    <a href="rules.html"><i class="fas fa-gavel"></i> قوانين العصابة</a>
+    <a href="history.html"><i class="fas fa-history"></i> تاريخ VAGOS</a>
+    <a href="contact.html"><i class="fas fa-headset"></i> التواصل مع القادة</a>
+  </nav>
+  
+  <!-- الهيدر -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-large">⚜</div>
+      <div class="logo-text">VAGOS</div>
+    </div>
+    <h1 class="gang-title">عصابة VAGOS</h1>
+    <h2 class="gang-subtitle">الأصفر هو لون الولاء</h2>
+    <p>نحن عائلة واحدة متحدة تحت راية اللون الأصفر. القوة في الوحدة، والولاء فوق كل شيء. قدم طلبك للانضمام إلى أكبر عصابة في المدينة وكن جزءاً من أسطورة مستمرة منذ 1995.</p>
+    
+    <div class="badges-container">
+      <span class="badge"><i class="fas fa-shield-alt"></i> مؤسس 1995</span>
+      <span class="badge"><i class="fas fa-users"></i> 150+ عضو نشط</span>
+      <span class="badge"><i class="fas fa-map-marker-alt"></i> حي VAGOS</span>
+      <span class="badge"><i class="fas fa-medal"></i> 28 سنة من التاريخ</span>
+      <span class="badge"><i class="fas fa-crown"></i> أقوى عصابة</span>
+    </div>
+  </header>
+  
+  <!-- نموذج التقديم -->
+  <div class="form-container">
+    <div class="form-header">
+      <h2>طلب الانضمام إلى VAGOS</h2>
+      <p>املأ النموذج أدناه بدقة وصدق. نحن نبحث عن أعضاء مخلصين وجديرين بالثقة. سيتم مراجعة طلبك من قبل مجلس القادة وسنتواصل معك خلال 48 ساعة.</p>
+    </div>
+    
+    <form id="applyForm">
+      <div class="form-group">
+        <label for="rpName"><i class="fas fa-user-ninja"></i>اسمك داخل اللعبة (مطلوب)</label>
+        <input type="text" id="rpName" placeholder="أدخل اسم شخصيتك في اللعبة كما هو بالضبط" required>
+        <div class="error-message" id="rpNameError">يجب أن يكون الاسم مكون من 3 أحرف على الأقل</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="age"><i class="fas fa-user-clock"></i>عمرك الحقيقي (مطلوب)</label>
+        <input type="number" id="age" placeholder="يجب أن يكون 18+ للانضمام" min="18" max="60" required>
+        <div class="error-message" id="ageError">يجب أن يكون عمرك بين 18 و 60 سنة</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="nationality"><i class="fas fa-globe-americas"></i>جنسيتك</label>
+        <input type="text" id="nationality" placeholder="البلد الذي تعيش فيه">
+      </div>
+      
+      <div class="form-group">
+        <label for="experience"><i class="fas fa-gamepad"></i>خبرتك في RP (مطلوب)</label>
+        <select id="experience" required>
+          <option value="" selected disabled>اختر مستوى خبرتك في لعب الأدوار</option>
+          <option value="beginner">مبتدئ (أقل من 3 أشهر)</option>
+          <option value="intermediate">متوسط (3-12 شهر)</option>
+          <option value="advanced">متقدم (1-3 سنوات)</option>
+          <option value="expert">خبير (أكثر من 3 سنوات)</option>
+        </select>
+        <div class="error-message" id="experienceError">يرجى اختيار مستوى خبرتك</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="playtime"><i class="fas fa-clock"></i>معدل وقت اللعب الأسبوعي (مطلوب)</label>
+        <select id="playtime" required>
+          <option value="" selected disabled>كم ساعة يمكنك اللعب أسبوعياً؟</option>
+          <option value="low">10-15 ساعة</option>
+          <option value="medium">16-25 ساعة</option>
+          <option value="high">26-40 ساعة</option>
+          <option value="very-high">40+ ساعة</option>
+        </select>
+        <div class="error-message" id="playtimeError">يرجى اختيار معدل وقت اللعب</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="characterStory"><i class="fas fa-book-open"></i>قصة شخصيتك في اللعبة</label>
+        <textarea id="characterStory" placeholder="اخبرنا قليلًا عن شخصيتك داخل اللعبة، خلفيتها، هواياتها، طموحاتها..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="reason"><i class="fas fa-question-circle"></i>لماذا تريد الانضمام إلى VAGOS بالتحديد؟ (مطلوب)</label>
+        <textarea id="reason" placeholder="ما الذي تعرفه عن عصابة VAGOS؟ ولماذا اخترتنا بالتحديد؟ ما الذي يمكنك تقديمه للعائلة؟ (100 حرف على الأقل)" required></textarea>
+        <div class="error-message" id="reasonError">يرجى كتابة سبب انضمامك بتفصيل (100 حرف على الأقل)</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="previousGangs"><i class="fas fa-users-slash"></i>الخبرات السابقة في العصابات</label>
+        <textarea id="previousGangs" placeholder="إذا كنت عضوًا سابقًا في أي عصابة، اذكر اسمها وسبب مغادرتك. إذا كانت هذه أول مرة، اكتب 'لا توجد خبرات سابقة'"></textarea>
+      </div>
+      
+      <!-- قسم الشروط -->
+      <div class="terms">
+        <h4>قوانين وشروط عضوية VAGOS:</h4>
+        <ul>
+          <li>الولاء للعصابة فوق كل الاعتبارات الشخصية والالتزام التام بقرارات القادة.</li>
+          <li>الالتزام بارتداء اللون الأصفر/الذهبي كزي رسمي للعصابة في جميع الأوقات.</li>
+          <li>الحفاظ على سرية أمور العصابة وعدم إفشاء أي معلومات لأي طرف خارجي.</li>
+          <li>الاستجابة الفورية لنداءات العصابة في أي وقت وفي أي ظرف كان.</li>
+          <li>الامتثال التام لقرارات مجلس القادة دون نقاش أو اعتراض.</li>
+          <li>فترة تجريبية لمدة أسبوعين قبل القبول النهائي مع تقييم مستمر.</li>
+          <li>المشاركة الفعالة في أنشطة العصابة وأعمالها والدفاع عن أراضيها.</li>
+          <li>يحظر القيام بأي أعمال فردية قد تضر بمصالح العصابة أو سمعتها.</li>
+        </ul>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="agreeTerms" required>
+        <label for="agreeTerms">أقر بأنني قرأت وفهمت جميع قوانين عصابة VAGOS المذكورة أعلاه، وأتعهد بالالتزام الكامل بها في حال قبولي كعضو. كما أتعهد بأن جميع المعلومات المقدمة في هذا النموذج صحيحة وكاملة، وأعلم أن تقديم معلومات خاطئة سيؤدي إلى رفض طلبي فوراً.</label>
+      </div>
+      <div class="error-message" id="termsError">يجب الموافقة على الشروط والأحكام للمتابعة</div>
+      
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> تقديم الطلب للانضمام إلى VAGOS
+      </button>
+    </form>
+    
+    <!-- رسالة النجاح -->
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">👑</div>
+      <h3>تم تقديم طلبك بنجاح!</h3>
+      <p>تم إرسال طلب انضمامك إلى عصابة VAGOS وإضافته إلى قائمة الانتظار في لوحة تحكم المشرفين.</p>
+      
+      <div class="success-details">
+        <h4>معلومات طلبك:</h4>
+        <p><strong>رقم الطلب:</strong> <span id="requestNumber">VAGOS-2023-0012</span></p>
+        <p><strong>تاريخ التقديم:</strong> <span id="requestDate"></span></p>
+        <p><strong>حالة الطلب:</strong> <span style="color: var(--warning-orange); font-weight: bold;">في انتظار المراجعة</span></p>
+      </div>
+      
+      <p>سيتم مراجعة طلبك من قبل مجلس قادة VAGOS في خلال 24-48 ساعة. سيتم إعلامك بأي تحديثات تخص طلبك.</p>
+      <p><strong>تذكر: الولاء للعصابة فوق كل شيء. اللون الأصفر هو هويتنا، والوحدة قوتنا.</strong></p>
+      <a href="../index.html" class="back-link"><i class="fas fa-home"></i> العودة إلى الصفحة الرئيسية</a>
+    </div>
+    
+    <div class="form-footer">
+      <p><i class="fas fa-exclamation-triangle" style="color: var(--primary-yellow);"></i> <strong>تحذير:</strong> تحذر عصابة VAGOS من تقديم معلومات خاطئة. سيتم رفض الطلب فور اكتشاف أي تزوير أو معلومات غير صحيحة، وقد يتم حظرك من التقديم مرة أخرى.</p>
+    </div>
+  </div>
+  
+  <!-- رابط الرجوع -->
+  <div style="text-align: center; margin-top: 50px;">
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة إلى الصفحة الرئيسية</a>
+  </div>
+
+  <script>
+    // قاعدة بيانات محاكاة للتقديمات
+    let applicationsDatabase = JSON.parse(localStorage.getItem('vagosApplications')) || [];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('applyForm');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessages = document.querySelectorAll('.error-message');
+      
+      // تعيين تاريخ اليوم في رسالة النجاح
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString('ar-EG', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      document.getElementById('requestDate').textContent = formattedDate;
+      
+      // توليد رقم طلب عشوائي
+      const requestNumber = 'VAGOS-' + today.getFullYear() + '-' + String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+      document.getElementById('requestNumber').textContent = requestNumber;
+      
+      // إعادة تعيين رسائل الخطأ
+      errorMessages.forEach(error => error.style.display = 'none');
+      
+      // إخفاء رسالة النجاح في البداية
+      successMessage.style.display = 'none';
+      
+      // التحقق من صحة البيانات عند الإرسال
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        
+        // إعادة تعيين جميع رسائل الخطأ
+        errorMessages.forEach(error => {
+          error.style.display = 'none';
+        });
+        
+        // إزالة كلاس الخطأ من جميع العناصر
+        document.querySelectorAll('.form-group').forEach(group => {
+          group.classList.remove('error');
+        });
+        
+        // التحقق من اسم RP
+        const rpName = document.getElementById('rpName').value.trim();
+        if (rpName.length < 3) {
+          document.getElementById('rpNameError').style.display = 'block';
+          document.getElementById('rpName').parentElement.classList.add('error');
+          isValid = false;
+        }
+        
+        // التحقق من العمر
+        const age = parseInt(document.getElementById('age').value);
+        if (isNaN(age) || age < 18 || age > 60) {
+          document.getElementById('ageError').style.display = 'block';
+          document.getElementById('age').parentElement.classList.add('error');
+          isValid = false;
+        }
+        
+        // التحقق من الخبرة
+        const experience = document.getElementById('experience').value;
+        if (!experience) {
+          document.getElementById('experienceError').style.display = 'block';
+          document.getElementById('experience').parentElement.classList.add('error');
+          isValid = false;
+        }
+        
+        // التحقق من وقت اللعب
+        const playtime = document.getElementById('playtime').value;
+        if (!playtime) {
+          document.getElementById('playtimeError').style.display = 'block';
+          document.getElementById('playtime').parentElement.classList.add('error');
+          isValid = false;
+        }
+        
+        // التحقق من سبب الانضمام
+        const reason = document.getElementById('reason').value.trim();
+        if (reason.length < 100) {
+          document.getElementById('reasonError').style.display = 'block';
+          document.getElementById('reason').parentElement.classList.add('error');
+          isValid = false;
+        }
+        
+        // التحقق من الموافقة على الشروط
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+        if (!agreeTerms) {
+          document.getElementById('termsError').style.display = 'block';
+          isValid = false;
+        }
+        
+        // إذا كانت البيانات صحيحة، إرسال الطلب
+        if (isValid) {
+          // عرض مؤشر التحميل
+          const submitBtn = form.querySelector('.submit-btn');
+          const originalBtnHTML = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<div class="loader"></div> جاري الإرسال...';
+          submitBtn.disabled = true;
+          
+          // محاكاة وقت الإرسال
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // جمع بيانات النموذج
+          const formData = {
+            id: Date.now(), // معرف فريد للطلب
+            requestNumber: requestNumber,
+            rpName: rpName,
+            age: age,
+            nationality: document.getElementById('nationality').value.trim(),
+            experience: experience,
+            playtime: playtime,
+            characterStory: document.getElementById('characterStory').value.trim(),
+            reason: reason,
+            previousGangs: document.getElementById('previousGangs').value.trim(),
+            submissionDate: today.toISOString(),
+            formattedDate: formattedDate,
+            status: 'pending',
+            gang: "VAGOS"
+          };
+          
+          // إضافة الطلب إلى قاعدة البيانات المحلية
+          applicationsDatabase.push(formData);
+          localStorage.setItem('vagosApplications', JSON.stringify(applicationsDatabase));
+          
+          // إشعار المشرفين (في الواقع الحقيقي، سيتم إرسال إشعار إلى لوحة التحكم)
+          notifyAdmins(formData);
+          
+          // عرض رسالة النجاح
+          submitBtn.innerHTML = originalBtnHTML;
+          submitBtn.disabled = false;
+          
+          form.style.opacity = '0.7';
+          form.style.transition = 'opacity 0.5s ease';
+          
+          setTimeout(() => {
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+            successMessage.style.opacity = '0';
+            successMessage.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+              successMessage.style.opacity = '1';
+              successMessage.style.transform = 'translateY(0)';
+              successMessage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            }, 100);
+            
+            // عرض إشعار نجاح
+            showNotification('تم إرسال طلبك بنجاح إلى مشرفي VAGOS!', 'success');
+            
+          }, 500);
+        }
+      });
+      
+      // إضافة تأثيرات عند التركيز على الحقول
+      const formInputs = document.querySelectorAll('input, select, textarea');
+      formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.style.transform = 'translateX(-10px)';
+          this.parentElement.style.transition = 'transform 0.3s ease';
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentElement.style.transform = 'translateX(0)';
+        });
+      });
+      
+      // تأثير عند التمرير
+      window.addEventListener('scroll', function() {
+        const formContainer = document.querySelector('.form-container');
+        const scrollPosition = window.scrollY;
+        const formPosition = formContainer.offsetTop;
+        
+        if (scrollPosition > formPosition - 400) {
+          formContainer.style.opacity = '1';
+          formContainer.style.transform = 'translateY(0)';
+        }
+      });
+      
+      // تهيئة التحريك الأولي
+      const formContainer = document.querySelector('.form-container');
+      formContainer.style.opacity = '0';
+      formContainer.style.transform = 'translateY(40px)';
+      formContainer.style.transition = 'opacity 1s ease, transform 1s ease';
+      
+      // تشغيل التحريك عند التحميل
+      setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'));
+      }, 200);
+      
+      // تأثيرات للشعار
+      const logo = document.querySelector('.logo-large');
+      logo.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1) rotate(10deg)';
+        this.style.transition = 'transform 0.5s ease';
+      });
+      
+      logo.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
+    
+    // إشعار المشرفين (محاكاة)
+    function notifyAdmins(applicationData) {
+      console.log('إشعار للمشرفين: تم تقديم طلب جديد', applicationData);
+      
+      // في الواقع الحقيقي، هنا سيتم إرسال طلب إلى لوحة تحكم المشرفين
+      // مثال: fetch('/admin-api/new-application', { method: 'POST', body: JSON.stringify(applicationData) })
+      
+      // يمكن إضافة المزيد من المنطق هنا مثل:
+      // 1. إرسال إشعار إلى Discord Webhook
+      // 2. إرسال بريد إلكتروني للمشرفين
+      // 3. تحديث قاعدة البيانات المركزية
+      // 4. إرسال إشعار إلى تطبيق الهاتف
+    }
+    
+    // عرض الإشعارات
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <div>
+          <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+          ${message}
+        </div>
+        <button class="close-notification"><i class="fas fa-times"></i></button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // زر الإغلاق
+      const closeBtn = notification.querySelector('.close-notification');
+      closeBtn.addEventListener('click', function() {
+        notification.style.animation = 'slideOutLeft 0.5s ease';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            document.body.removeChild(notification);
+          }
+        }, 500);
+      });
+      
+      // إغلاق تلقائي بعد 5 ثوان
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.style.animation = 'slideOutLeft 0.5s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              document.body.removeChild(notification);
+            }
+          }, 500);
+        }
+      }, 5000);
+      
+      // إضافة animation للإغلاق
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideOutLeft {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(-100%); opacity: 0; }
+        }
+        
+        .close-notification {
+          background: none;
+          border: none;
+          color: white;
+          margin-right: 15px;
+          cursor: pointer;
+          font-size: 1.2rem;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+    
+    // دالة للمساعدة في التنسيق
+    function formatDate(date) {
+      return date.toLocaleDateString('ar-EG', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+  </script>
+</body>
+</html>

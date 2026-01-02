@@ -1,0 +1,37 @@
+{
+  "ranks": [
+    {
+      "id": 1,
+      "name": "OG",
+      "level": 4,
+      "permissions": ["all"],
+      "description": "الأعلى رتبة - مسؤول عام"
+    },
+    {
+      "id": 2,
+      "name": "CO OG",
+      "level": 3,
+      "permissions": ["manage_users", "manage_content"],
+      "description": "مساعد مسؤول"
+    },
+    {
+      "id": 3,
+      "name": "Lieutenant",
+      "level": 2,
+      "permissions": ["manage_content", "view_reports"],
+      "description": "رتبة متوسطة - مشرف"
+    },
+    {
+      "id": 4,
+      "name": "Member",
+      "level": 1,
+      "permissions": ["basic_access"],
+      "description": "عضو عادي"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created": "2024-01-01",
+    "hierarchy": "descending"
+  }
+}

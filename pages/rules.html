@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قوانين الإمبراطورية | GANG VAGOS | YELLOW EMPIRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --dark-yellow: #FFC107;
+      --gold-yellow: #FFB800;
+      --yellow-glow: #FFE55C;
+      --primary-black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --light-gray: #3A3A3A;
+      --text-light: #F5F5F5;
+      --text-gray: #AAAAAA;
+      --shadow-yellow: rgba(255, 215, 0, 0.3);
+      --rule-important: #ff4444;
+      --rule-warning: #FFA500;
+      --rule-normal: #44aaff;
+      --rule-info: #00cc99;
+      --rule-respect: #FFD700;
+      --success-green: #28a745;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Scheherazade New', sans-serif;
+    }
+    
+    body {
+      background-color: var(--primary-black);
+      color: var(--text-light);
+      line-height: 1.7;
+      direction: rtl;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    /* إخفاء شريط التمرير */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--dark-gray);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-yellow);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--dark-yellow);
+    }
+    
+    /* شريط التنقل */
+    nav.navbar {
+      background-color: rgba(26, 26, 26, 0.95);
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary-yellow);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary-yellow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .nav-brand i {
+      font-size: 1.5rem;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 20px 25px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav a:hover {
+      color: var(--primary-yellow);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-yellow);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--primary-yellow);
+    }
+    
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    .nav-cta {
+      background-color: var(--primary-yellow);
+      color: var(--primary-black) !important;
+      padding: 10px 25px !important;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+    
+    .nav-cta:hover {
+      background-color: var(--dark-yellow);
+      color: var(--primary-black) !important;
+    }
+    
+    .nav-cta::after {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary-yellow);
+      cursor: pointer;
+    }
+    
+    /* الهيدر */
+    .rules-header {
+      text-align: center;
+      padding: 80px 20px 50px;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .rules-logo {
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+      color: var(--primary-black);
+      font-size: 3.5rem;
+      line-height: 120px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+      border: 3px solid var(--primary-yellow);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+    }
+    
+    .rules-header h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      margin-bottom: 15px;
+    }
+    
+    .rules-header .tagline {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 30px;
+      position: relative;
+      padding: 10px 0;
+    }
+    
+    .tagline::before, .tagline::after {
+      content: "•";
+      color: var(--primary-yellow);
+      margin: 0 15px;
+      font-size: 1.8rem;
+    }
+    
+    /* محتوى القوانين */
+    .rules-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      color: var(--primary-yellow);
+      font-size: 2.5rem;
+      margin: 60px 0 40px;
+      padding-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      border-radius: 2px;
+    }
+    
+    /* قسم التنبيه المهم */
+    .important-notice {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+      border: 3px solid var(--primary-yellow);
+      border-radius: 15px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 1200px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .important-notice::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .important-notice h3 {
+      color: var(--primary-yellow);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .important-notice p {
+      color: var(--text-light);
+      font-size: 1.3rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* فلاتر القوانين */
+    .rules-filter {
+      max-width: 1200px;
+      margin: 50px auto;
+      text-align: center;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 2px solid var(--light-gray);
+    }
+    
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    .filter-btn {
+      padding: 15px 35px;
+      background-color: rgba(40, 40, 40, 0.9);
+      border: 2px solid var(--light-gray);
+      border-radius: 30px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      border-color: var(--primary-yellow);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* فئات القوانين */
+    .rules-category {
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      margin-bottom: 50px;
+      border-right: 6px solid;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+    
+    .rules-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    }
+    
+    .rules-category:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8);
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+      position: relative;
+    }
+    
+    .category-icon {
+      font-size: 3.5rem;
+      margin-left: 25px;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: rgba(255, 215, 0, 0.1);
+      border: 2px solid;
+      transition: all 0.3s ease;
+    }
+    
+    .rules-category:hover .category-icon {
+      transform: scale(1.1) rotate(5deg);
+      background-color: rgba(255, 215, 0, 0.2);
+    }
+    
+    .category-title {
+      font-size: 2.2rem;
+      color: white;
+      font-weight: 800;
+    }
+    
+    /* قائمة القوانين */
+    .rules-list {
+      list-style-type: none;
+      counter-reset: rule-counter;
+    }
+    
+    .rule-item {
+      margin-bottom: 30px;
+      padding: 30px;
+      background-color: rgba(40, 40, 40, 0.7);
+      border-radius: 12px;
+      border-right: 5px solid;
+      position: relative;
+      transition: all 0.4s ease;
+      counter-increment: rule-counter;
+      overflow: hidden;
+    }
+    
+    .rule-item:hover {
+      transform: translateX(-10px);
+      background-color: rgba(50, 50, 50, 0.9);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    
+    .rule-item::before {
+      content: counter(rule-counter);
+      position: absolute;
+      right: -20px;
+      top: -20px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+    
+    .rule-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: white;
+      padding-left: 50px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .rule-description {
+      color: #ccc;
+      font-size: 1.3rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .rule-penalty {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      font-size: 1.2rem;
+      border-right: 4px solid var(--primary-yellow);
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .penalty-title {
+      color: var(--primary-yellow);
+      font-weight: 800;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* ألوان فئات القوانين */
+    .category-general { border-color: var(--rule-normal); }
+    .category-general .category-icon { 
+      color: var(--rule-normal); 
+      border-color: var(--rule-normal);
+    }
+    .category-general .rule-item { border-color: var(--rule-normal); }
+    
+    .category-rp { border-color: var(--rule-info); }
+    .category-rp .category-icon { 
+      color: var(--rule-info); 
+      border-color: var(--rule-info);
+    }
+    .category-rp .rule-item { border-color: var(--rule-info); }
+    
+    .category-respect { border-color: var(--rule-respect); }
+    .category-respect .category-icon { 
+      color: var(--rule-respect); 
+      border-color: var(--rule-respect);
+    }
+    .category-respect .rule-item { border-color: var(--rule-respect); }
+    
+    .category-punishment { border-color: var(--rule-important); }
+    .category-punishment .category-icon { 
+      color: var(--rule-important); 
+      border-color: var(--rule-important);
+    }
+    .category-punishment .rule-item { border-color: var(--rule-important); }
+    
+    /* ملخص العقوبات */
+    .penalties-summary {
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      margin: 60px auto;
+      max-width: 1200px;
+      border: 3px solid var(--rule-important);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .penalties-summary::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 68, 68, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .penalties-title {
+      color: var(--rule-important);
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .penalties-table {
+      width: 100%;
+      border-collapse: collapse;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .penalties-table th {
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(196, 8, 8, 0.2));
+      color: var(--text-light);
+      padding: 20px;
+      text-align: right;
+      border-bottom: 3px solid var(--primary-yellow);
+      font-size: 1.2rem;
+    }
+    
+    .penalties-table td {
+      padding: 20px;
+      border-bottom: 1px solid var(--light-gray);
+      color: #ccc;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .penalties-table tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .penalties-table tr:hover td {
+      color: white;
+    }
+    
+    .penalty-level {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .level-low { 
+      background: linear-gradient(135deg, rgba(255, 204, 0, 0.3), rgba(255, 153, 0, 0.2)); 
+      color: #ffcc00; 
+      border: 1px solid rgba(255, 204, 0, 0.5);
+    }
+    
+    .level-medium { 
+      background: linear-gradient(135deg, rgba(255, 153, 0, 0.3), rgba(255, 102, 0, 0.2)); 
+      color: #ff9900; 
+      border: 1px solid rgba(255, 153, 0, 0.5);
+    }
+    
+    .level-high { 
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(255, 0, 0, 0.2)); 
+      color: #ff4444; 
+      border: 1px solid rgba(255, 68, 68, 0.5);
+    }
+    
+    .level-extreme { 
+      background: linear-gradient(135deg, rgba(196, 8, 8, 0.4), rgba(139, 0, 0, 0.3)); 
+      color: #ff0000; 
+      border: 1px solid rgba(196, 8, 8, 0.6);
+    }
+    
+    /* قسم التواقيع */
+    .signatures {
+      max-width: 1200px;
+      margin: 60px auto;
+      background-color: rgba(30, 30, 30, 0.85);
+      border-radius: 15px;
+      padding: 50px;
+      border: 2px solid var(--primary-yellow);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .signatures::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .signature-item {
+      margin: 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .signature-name {
+      color: var(--primary-yellow);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 900;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .signature-role {
+      color: var(--text-gray);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    .signature-line {
+      width: 400px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+      margin: 30px auto;
+    }
+    
+    .signature-item p {
+      color: #ccc;
+      font-size: 1.3rem;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    
+    /* قسم التأكيد */
+    .confirmation {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 204, 153, 0.1), rgba(0, 170, 136, 0.05));
+      padding: 50px;
+      border-radius: 15px;
+      border: 3px solid var(--rule-info);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .confirmation::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 204, 153, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .confirmation h3 {
+      color: var(--rule-info);
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .confirmation p {
+      color: #ccc;
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      line-height: 1.9;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* زر الرجوع */
+    .back-link {
+      display: inline-block;
+      color: var(--primary-yellow);
+      text-decoration: none;
+      font-size: 1.4rem;
+      margin-top: 40px;
+      padding: 18px 45px;
+      border: 3px solid var(--primary-yellow);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-weight: 800;
+      background-color: rgba(255, 215, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .back-link:hover {
+      background: linear-gradient(135deg, var(--primary-yellow), var(--dark-yellow));
+      color: var(--primary-black);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+      letter-spacing: 1px;
+    }
+    
+    .back-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--dark-yellow), var(--primary-yellow));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      border-radius: 30px;
+    }
+    
+    .back-link:hover::before {
+      opacity: 1;
+    }
+    
+    .back-link i {
+      margin-right: 12px;
+    }
+    
+    /* تصميم متجاوب */
+    @media (max-width: 1100px) {
+      .rules-category, .penalties-summary, .signatures, .confirmation {
+        padding: 40px 30px;
+      }
+      
+      .rules-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .category-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-gray);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        border-left: 2px solid var(--primary-yellow);
+        z-index: 1000;
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .category-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .category-icon {
+        margin-left: 0;
+        margin-bottom: 20px;
+      }
+      
+      .penalties-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .rules-header h1 {
+        font-size: 2rem;
+      }
+      
+      .rules-header .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .rule-title {
+        font-size: 1.4rem;
+      }
+      
+      .rule-description {
+        font-size: 1.1rem;
+      }
+      
+      .signature-line {
+        width: 250px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .rules-logo {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+        line-height: 100px;
+      }
+      
+      .rules-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .category-title {
+        font-size: 1.6rem;
+      }
+      
+      .rule-item {
+        padding: 25px 20px;
+      }
+      
+      .rules-category, .penalties-summary, .signatures, .confirmation {
+        padding: 30px 20px;
+      }
+    }
+    
+    /* تأثيرات الظهور */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* تأثير نسخ النص */
+    .copy-alert {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--success-green), #1e7e34);
+      color: white;
+      padding: 20px 35px;
+      border-radius: 10px;
+      z-index: 2000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+      from { top: -100px; opacity: 0; }
+      to { top: 30px; opacity: 1; }
+    }
+    
+    /* تأثيرات القوانين */
+    .rule-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .rule-item:hover::after {
+      opacity: 1;
+    }
+    
+    /* رسالة الترحيب */
+    .welcome-message {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(255, 215, 0, 0.1);
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 1000px;
+      border: 2px solid var(--primary-yellow);
+    }
+    
+    .welcome-message h3 {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .welcome-message p {
+      color: #ccc;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <i class="fas fa-crown"></i>
+        <span>GANG VAGOS</span>
+      </a>
+      
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="apply.html"><i class="fas fa-user-plus"></i> التقديم</a></li>
+        <li><a href="members.html"><i class="fas fa-users"></i> الأعضاء</a></li>
+        <li><a href="rules.html" class="active"><i class="fas fa-gavel"></i> القوانين</a></li>
+        <li><a href="contact.html"><i class="fas fa-phone-alt"></i> التواصل</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- الهيدر -->
+  <header class="rules-header">
+    <div class="rules-logo">⚖️</div>
+    <h1>دستور الإمبراطورية الصفراء</h1>
+    <p class="tagline">GANG VAGOS | YELLOW EMPIRE</p>
+    <div class="welcome-message fade-in">
+      <h3><i class="fas fa-scroll"></i> الميثاق الإمبراطوري</h3>
+      <p>هذه القوانين هي أساس قوة وتماسك إمبراطوريتنا. الالتزام بها ليس خياراً، بل واجب مقدس على كل من يحمل اسم VAGOS.</p>
+    </div>
+  </header>
+  
+  <!-- قسم التنبيه المهم -->
+  <div class="important-notice fade-in">
+    <h3><i class="fas fa-exclamation-triangle"></i> إعلان إمبراطوري مهم</h3>
+    <p>جميع محاربي GANG VAGOS ملزمون بقراءة وفهم هذا الدستور الإمبراطوري والالتزام به. الجهل بالقانون ليس عذراً للمخالفة. بالتقديم للانضمام للإمبراطورية، فإنك تقسم على الولاء الكامل لهذه القوانين.</p>
+  </div>
+  
+  <!-- فلاتر القوانين -->
+  <div class="rules-filter fade-in">
+    <h3 class="section-title">أبواب الدستور الإمبراطوري</h3>
+    <p style="color: #ccc; margin-bottom: 25px; font-size: 1.3rem;">اختر الباب الذي تريد استعراضه:</p>
+    
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">
+        <i class="fas fa-book"></i> كل الأبواب
+      </button>
+      <button class="filter-btn" data-filter="general">
+        <i class="fas fa-gavel"></i> القوانين الإمبراطورية
+      </button>
+      <button class="filter-btn" data-filter="rp">
+        <i class="fas fa-theater-masks"></i> قوانين المعارك
+      </button>
+      <button class="filter-btn" data-filter="respect">
+        <i class="fas fa-handshake"></i> قوانين الولاء
+      </button>
+      <button class="filter-btn" data-filter="punishment">
+        <i class="fas fa-balance-scale"></i> نظام العدالة
+      </button>
+    </div>
+  </div>
+  
+  <!-- محتوى القوانين -->
+  <div class="rules-container">
+    <!-- القوانين العامة -->
+    <div class="rules-category category-general fade-in" data-category="general">
+      <div class="category-header">
+        <div class="category-icon"><i class="fas fa-gavel"></i></div>
+        <h2 class="category-title">القوانين الإمبراطورية الأساسية</h2>
+      </div>
+      
+      <ol class="rules-list">
+        <li class="rule-item">
+          <div class="rule-title">الولاء المطلق للإمبراطورية</div>
+          <div class="rule-description">
+            الولاء للإمبراطورية الصفراء فوق كل الولاءات. لا يجوز الانضمام لعصابة أخرى أو العمل ضد مصلحة GANG VAGOS تحت أي ظرف. الإمبراطورية تأتي قبل أي اعتبارات شخصية أو تحالفات خارجية.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-skull-crossbones"></i> العقوبة الإمبراطورية:</div>
+            <div>الطرد الفوري من الإمبراطورية مع إعلان الخيانة لجميع عصابات المدينة.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">الامتثال لقوانين ساحة المعركة (السيرفر)</div>
+          <div class="rule-description">
+            يجب على جميع المحاربين الالتزام الكامل بقوانين ساحة المعركة (سيرفر FiveM). أي مخالفة لقوانين الساحة تعتبر مخالفة للقوانين الإمبراطورية وسيتم التعامل معها بصرامة.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-exclamation-triangle"></i> العقوبة الإمبراطورية:</div>
+            <div>حسب خطورة المخالفة، تتراوح بين الإنذار الذهبي والطرد الفوري من الإمبراطورية.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">حماية ممتلكات الإمبراطورية</div>
+          <div class="rule-description">
+            جميع ممتلكات الإمبراطورية (مركبات حربية، أسلحة إمبراطورية، خزينة الذهب) ملك للإمبراطورية وليست ملكاً شخصياً لأي محارب. يجب الحفاظ عليها واستخدامها فقط لصالح الإمبراطورية الصفراء.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-coins"></i> العقوبة الإمبراطورية:</div>
+            <div>استعادة الممتلكات المسروقة + غرامة إمبراطورية + عقوبة قد تصل إلى الطرد.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">سرية المعلومات الإمبراطورية</div>
+          <div class="rule-description">
+            يحظر مشاركة أي معلومات داخلية عن الإمبراطورية مع غير المحاربين. يشمل ذلك خطط المعارك، أسماء المحاربين، الحصون الآمنة، وأي معلومات استراتيجية أخرى.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-user-secret"></i> العقوبة الإمبراطورية:</div>
+            <div>حسب خطورة المعلومات المسربة، تصل إلى الطرد الفوري والمحاكمة الإمبراطورية.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+    
+    <!-- قوانين RP -->
+    <div class="rules-category category-rp fade-in" data-category="rp">
+      <div class="category-header">
+        <div class="category-icon"><i class="fas fa-theater-masks"></i></div>
+        <h2 class="category-title">قوانين ساحة المعارك (RP)</h2>
+      </div>
+      
+      <ol class="rules-list">
+        <li class="rule-item">
+          <div class="rule-title">ممنوع القتل العشوائي (DM / Deathmatch)</div>
+          <div class="rule-description">
+            يحرم قتل المحاربين بدون سبب منطقي في ساحة المعركة. يجب أن يكون هناك سياق حقيقي للقتل مثل حرب عصابات، سرقة إمبراطورية، دفاع عن الحصن، أو تنفيذ أوامر القيادة العليا.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-ban"></i> العقوبة الإمبراطورية:</div>
+            <div>حسب السياق، تبدأ من إنذار ذهبي وتصل إلى تعليق من المعارك الإمبراطورية.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">ممنوع استخدام معلومات خارج المعركة (Meta Gaming)</div>
+          <div class="rule-description">
+            يحظر استخدام معلومات خارج ساحة المعركة داخلها. معرفة مكان محارب من Discord واستخدام هذه المعلومة في المعركة يعتبر خيانة لمبادئ القتال النبيل.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-user-ninja"></i> العقوبة الإمبراطورية:</div>
+            <div>إنذار ذهبي أولي، ثم عقوبات متصاعدة حسب التكرار والإساءة.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">ممنوع القوى الخارقة (Power Gaming)</div>
+          <div class="rule-description">
+            يحظر فعل أشياء غير واقعية أو مستحيلة في عالم المعارك. القفز من حصن مرتفع والهرب بسرعة، أو البقاء حياً بعد إصابات بالغة غير واقعية يعتبر خرقاً لمبادئ المعركة الشريفة.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-running"></i> العقوبة الإمبراطورية:</div>
+            <div>إنذار وتعليق من المعارك الإمبراطورية لمدة أسبوع.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">الالتزام بهوية المحارب (Character)</div>
+          <div class="rule-description">
+            يجب الالتزام بشخصية محارب واحدة ثابتة في ساحة المعركة. لا يجوز تغيير الهوية أو الشخصية إلا بعد موافقة القيادة العليا. يجب أن تكون شخصية المحارب متسقة في جميع المعارك والتفاعلات.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-user-tag"></i> العقوبة الإمبراطورية:</div>
+            <div>توبيخ وتوجيه إمبراطوري، وفي حال التكرار عقوبة أشد.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">جودة المعارك (Quality RP)</div>
+          <div class="rule-description">
+            يجب تقديم معارك بجودة إمبراطورية عالية والتفاعل بجدية مع المواقف الحربية. الهدف هو خلق تجربة معارك واقعية ومشرفة للإمبراطورية، وليس فقط جمع الغنائم أو تحقيق الانتصارات.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-medal"></i> العقوبة الإمبراطورية:</div>
+            <div>تدريب إلزامي على فنون المعركة، وفي حال عدم التحسن قد يؤدي إلى الطرد.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+    
+    <!-- قوانين الاحترام -->
+    <div class="rules-category category-respect fade-in" data-category="respect">
+      <div class="category-header">
+        <div class="category-icon"><i class="fas fa-handshake"></i></div>
+        <h2 class="category-title">قوانين الولاء والاحترام الإمبراطوري</h2>
+      </div>
+      
+      <ol class="rules-list">
+        <li class="rule-item">
+          <div class="rule-title">احترام الرتب والقيادة العليا</div>
+          <div class="rule-description">
+            يجب احترام جميع الرتب الأعلى في الإمبراطورية والاستجابة لأوامرهم في المعارك. يمكن مناقشة الأوامر بعد انتهاء المعركة، ولكن أثناء المعركة يجب الطاعة المطلقة.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-crown"></i> العقوبة الإمبراطورية:</div>
+            <div>حسب خطورة عدم الطاعة، تبدأ من إنذار ذهبي وتصل إلى خفض الرتبة الإمبراطورية.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">الاحترام المتبادل بين محاربي الإمبراطورية</div>
+          <div class="rule-description">
+            يجب التعامل باحترام إمبراطوري مع جميع محاربي VAGOS. يحظر الشتم أو الإهانة أو التمييز بين المحاربين لأي سبب كان. الخلافات تحل بطريقة حضارية عبر محكمة الإمبراطورية.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-users"></i> العقوبة الإمبراطورية:</div>
+            <div>اعتذار إمبراطوري إجباري، وإنذار ذهبي، وفي حال التكرار عقوبة أشد.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">احترام مجتمع ساحة المعركة</div>
+          <div class="rule-description">
+            يمثل كل محارب سمعة الإمبراطورية الصفراء. يجب التعامل باحترام مع جميع المحاربين خارج الإمبراطورية. السلوك السيء ينعكس على سمعة GANG VAGOS ككل ويضر بعلاقاتنا التحالفية.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-globe"></i> العقوبة الإمبراطورية:</div>
+            <div>حسب نوع الإساءة، تبدأ من إنذار ذهبي وتصل إلى الطرد من الإمبراطورية.</div>
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">النضج والسلوك الإمبراطوري</div>
+          <div class="rule-description">
+            يجب الحفاظ على مستوى عالٍ من النضج والسلوك الإمبراطوري داخل وخارج ساحة المعركة. يشمل ذلك التعامل في حصن Discord، وسائل التواصل الإمبراطورية، وأي منصات أخرى تمثل الإمبراطورية.
+          </div>
+          <div class="rule-penalty">
+            <div class="penalty-title"><i class="fas fa-user-graduate"></i> العقوبة الإمبراطورية:</div>
+            <div>توبيخ إمبراطوري، وإنذار ذهبي، وفي حالات متكررة قد تؤدي للطرد.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+    
+    <!-- قوانين العقوبات -->
+    <div class="rules-category category-punishment fade-in" data-category="punishment">
+      <div class="category-header">
+        <div class="category-icon"><i class="fas fa-balance-scale"></i></div>
+        <h2 class="category-title">نظام العدالة والعقوبات الإمبراطورية</h2>
+      </div>
+      
+      <ol class="rules-list">
+        <li class="rule-item">
+          <div class="rule-title">سجل المخالفات الإمبراطوري</div>
+          <div class="rule-description">
+            يتم تسجيل جميع المخالفات في السجل الإمبراطوري الذهبي. كل محارب لديه ملف مخالفات يتابع تطور سلوكه العسكري. المخالفات تبقى في السجل لمدة 3 أشهر قمرية.
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">الإنذارات الذهبية</div>
+          <div class="rule-description">
+            معظم المخالفات تبدأ بإنذار ذهبي شفهي أو مكتوب. بعد 3 إنذارات ذهبية رسمية، تبدأ العقوبات الإمبراطورية الأكثر صرامة. الإنذارات تزول بعد 30 يوماً من السلوك الإمبراطوري الجيد.
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">التصعيد في العقوبات الإمبراطورية</div>
+          <div class="rule-description">
+            العقوبات الإمبراطورية تتدرج من الإنذار الذهبي، إلى الغرامة المالية داخل ساحة المعركة، إلى تعليق من المعارك الإمبراطورية، إلى خفض الرتبة الإمبراطورية، وأخيراً الطرد من الإمبراطورية الصفراء.
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">حق الدفاع والاستئناف الإمبراطوري</div>
+          <div class="rule-description">
+            لكل محارب حق الدفاع عن نفسه أمام محكمة القيادة العليا. يمكن استئناف العقوبة الإمبراطورية خلال 48 ساعة من إعلانها. القرار النهائي بيد الإمبراطور الأعلى EL JEFE.
+          </div>
+        </li>
+        
+        <li class="rule-item">
+          <div class="rule-title">العقوبات الفورية الإمبراطورية</div>
+          <div class="rule-description">
+            بعض المخالفات الخطيرة (كخيانة الإمبراطورية أو قتل عشوائي متعمد) تستوجب عقوبة إمبراطورية فورية بدون إنذارات مسبقة، وقد تصل إلى الطرد الفوري من الإمبراطورية الصفراء.
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  
+  <!-- ملخص العقوبات -->
+  <div class="penalties-summary fade-in">
+    <h3 class="penalties-title">جدول العقوبات الإمبراطورية المتدرجة</h3>
+    
+    <table class="penalties-table">
+      <thead>
+        <tr>
+          <th>مستوى المخالفة</th>
+          <th>أمثلة على المخالفات الإمبراطورية</th>
+          <th>العقوبة الإمبراطورية الأولى</th>
+          <th>العقوبة الإمبراطورية الثانية (تكرار)</th>
+          <th>العقوبة الإمبراطورية الثالثة (تكرار متعدد)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="penalty-level level-low">مخالفة ذهبية خفيفة</span></td>
+          <td>تأخير بدون إشعار، نسيان أمر بسيط، خطأ غير مقصود في المعركة</td>
+          <td>توبيخ إمبراطوري شفهي</td>
+          <td>إنذار ذهبي رسمي</td>
+          <td>غرامة إمبراطورية داخل ساحة المعركة</td>
+        </tr>
+        <tr>
+          <td><span class="penalty-level level-medium">مخالفة ذهبية متوسطة</span></td>
+          <td>عدم طاعة أمر في معركة، إساءة لفظية خفيفة، خطأ في المعركة يؤثر على الآخرين</td>
+          <td>إنذار ذهبي رسمي</td>
+          <td>تعليق من المعارك الإمبراطورية (3 أيام)</td>
+          <td>خفض رتبة إمبراطورية مؤقت</td>
+        </tr>
+        <tr>
+          <td><span class="penalty-level level-high">مخالفة ذهبية خطيرة</span></td>
+          <td>قتل عشوائي بدون سبب، قوى خارقة متعمدة، إهانة محارب آخر، سرقة من خزينة الإمبراطورية</td>
+          <td>تعليق من المعارك الإمبراطورية (أسبوع)</td>
+          <td>خفض رتبة إمبراطورية دائم</td>
+          <td>الطرد من الإمبراطورية الصفراء</td>
+        </tr>
+        <tr>
+          <td><span class="penalty-level level-extreme">مخالفة ذهبية شديدة الخطورة</span></td>
+          <td>خيانة الإمبراطورية، تسريب معلومات إمبراطورية، استخدام معلومات خارجية لتدمير معركة</td>
+          <td>الطرد الفوري من الإمبراطورية</td>
+          <td>الإبلاغ لإدارة ساحة المعركة</td>
+          <td>حظر من مجتمع المحاربين</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- قسم التواقيع -->
+  <div class="signatures fade-in">
+    <h3 class="section-title">التواقيع والموافقات الإمبراطورية</h3>
+    
+    <div class="signature-item">
+      <div class="signature-name">EL JEFE</div>
+      <div class="signature-role">الإمبراطور الأعلى</div>
+      <div class="signature-line"></div>
+      <p>"الدستور الإمبراطوري هو أساس قوتنا الذهبية. بدون الانضباط الإمبراطوري لا يمكننا البقاء أسياداً لساحة المعركة."</p>
+    </div>
+    
+    <div class="signature-item">
+      <div class="signature-name">EL SICARIO</div>
+      <div class="signature-role">قائد العمليات الحربية</div>
+      <div class="signature-line"></div>
+      <p>"الالتزام بالقوانين الإمبراطورية ليس خياراً، إنه واجب مقدس على كل من يحمل اسم VAGOS في قلبه."</p>
+    </div>
+  </div>
+  
+  <!-- قسم التأكيد -->
+  <div class="confirmation fade-in">
+    <h3><i class="fas fa-file-signature"></i> القسم الإمبراطوري النهائي</h3>
+    <p>بالتقديم للانضمام إلى الإمبراطورية الصفراء GANG VAGOS، فإنك تقر بأنك قرأت وفهمت جميع بنود الدستور الإمبراطوري المذكور أعلاه، وتقسم على الالتزام الكامل بها.</p>
+    <p>أي مخالفة لهذه القوانين الإمبراطورية تعني موافقتك المسبقة على تطبيق العقوبات الإمبراطورية المناسبة، والتي قد تصل إلى الطرد من الإمبراطورية الصفراء.</p>
+  </div>
+  
+  <!-- رابط الرجوع -->
+  <div style="text-align: center; margin: 60px 0 40px;">
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة إلى القلعة الإمبراطورية</a>
+  </div>
+  
+  <!-- رسالة نسخ ناجح -->
+  <div class="copy-alert" id="copyAlert">
+    <i class="fas fa-check-circle"></i> تم نسخ نص القانون إلى الحافظة الإمبراطورية!
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // تبديل القائمة المتنقلة
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.innerHTML = navMenu.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+      
+      // إغلاق القائمة عند النقر على رابط
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // تأثير التمرير للشريط العلوي
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.7)';
+        } else {
+          navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+          navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+        }
+      });
+      
+      // فلترة القوانين حسب الفئة
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const ruleCategories = document.querySelectorAll('.rules-category');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // إزالة الفعال من جميع الأزرار
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // إضافة الفعال للزر المختار
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          
+          // عرض/إخفاء فئات القوانين حسب الفلتر
+          ruleCategories.forEach(category => {
+            if (filter === 'all') {
+              category.style.display = 'block';
+              setTimeout(() => {
+                category.style.opacity = '1';
+                category.style.transform = 'translateY(0)';
+              }, 50);
+            } else if (category.getAttribute('data-category') === filter) {
+              category.style.display = 'block';
+              setTimeout(() => {
+                category.style.opacity = '1';
+                category.style.transform = 'translateY(0)';
+              }, 50);
+            } else {
+              category.style.opacity = '0';
+              category.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                category.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+      
+      // تأثير عند النقر على بنود القوانين (نسخ)
+      const ruleItems = document.querySelectorAll('.rule-item');
+      const copyAlert = document.getElementById('copyAlert');
+      
+      ruleItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const ruleTitle = this.querySelector('.rule-title').textContent;
+          const ruleDescription = this.querySelector('.rule-description').textContent;
+          const ruleNumber = this.counter; // من counter CSS
+          
+          const textToCopy = `القانون ${ruleNumber}: ${ruleTitle}\n\n${ruleDescription}`;
+          
+          // نسخ النص إلى الحافظة
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            // عرض رسالة النجاح
+            copyAlert.style.display = 'block';
+            setTimeout(() => {
+              copyAlert.style.display = 'none';
+            }, 2500);
+            
+            // تأثير مرئي على العنصر المنسوخ
+            this.style.backgroundColor = 'rgba(255, 215, 0, 0.2)';
+            this.style.borderColor = 'var(--primary-yellow)';
+            this.style.boxShadow = '0 15px 35px rgba(255, 215, 0, 0.3)';
+            
+            setTimeout(() => {
+              this.style.backgroundColor = 'rgba(40, 40, 40, 0.7)';
+              this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.4)';
+            }, 1000);
+          }).catch(err => {
+            console.error('فشل في نسخ النص: ', err);
+          });
+        });
+      });
+      
+      // تأثيرات الظهور للعناصر
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(40px)';
+        fadeObserver.observe(element);
+      });
+      
+      // تأثيرات الأزرار
+      const buttons = document.querySelectorAll('.filter-btn, .back-link');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(0) scale(1)';
+          }
+        });
+      });
+      
+      // تأثير عند التحميل
+      window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        
+        setTimeout(() => {
+          document.body.style.opacity = '1';
+        }, 100);
+      });
+      
+      // تأثيرات الجداول
+      const tableRows = document.querySelectorAll('.penalties-table tr');
+      tableRows.forEach((row, index) => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(30px)';
+        row.style.transition = 'opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease';
+        
+        setTimeout(() => {
+          row.style.opacity = '1';
+          row.style.transform = 'translateX(0)';
+        }, 300 + index * 100);
+      });
+      
+      // تأثيرات بطاقات القوانين
+      ruleCategories.forEach((category, index) => {
+        category.style.opacity = '0';
+        category.style.transform = 'translateY(50px) rotateX(10deg)';
+        category.style.transition = 'opacity 0.8s ease, transform 0.8s ease, display 0.3s ease, box-shadow 0.4s ease';
+        
+        setTimeout(() => {
+          category.style.opacity = '1';
+          category.style.transform = 'translateY(0) rotateX(0)';
+        }, 300 + index * 200);
+      });
+      
+      // تأثيرات بنود القوانين
+      ruleItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+        
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, 500 + index * 100);
+      });
+      
+      // تأثيرات الأيقونات
+      const categoryIcons = document.querySelectorAll('.category-icon');
+      categoryIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.2) rotate(15deg)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1) rotate(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
